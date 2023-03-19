@@ -2,9 +2,11 @@
 
 import 'package:assignmen_1/Screens/Home.dart';
 import 'package:assignmen_1/Screens/register.dart';
+import 'package:assignmen_1/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -107,6 +109,8 @@ class Login extends StatelessWidget {
                   ),
                 ),
                 onPressed: () async {
+                  // var sharepref = await SharedPreferences.getInstance();
+                  //   sharepref.setBool(MyAppstate.keyauth, true);
                   try {
                     // ignore: unused_local_variable
                     final credential =
@@ -114,6 +118,7 @@ class Login extends StatelessWidget {
                       email: email,
                       password: password,
                     );
+
                     Get.offAll(() => const Home());
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {

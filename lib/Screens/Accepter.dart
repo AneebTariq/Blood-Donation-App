@@ -96,7 +96,14 @@ class Accepter extends StatelessWidget {
             thickness: 1,
             color: Colors.red,
           ),
-          const Alldonor(),
+          const SizedBox(
+            height: 10,
+          ),
+          ListView(
+            children: const <Widget>[
+              Alldonor(),
+            ],
+          ),
         ],
       ),
     );

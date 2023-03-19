@@ -2,6 +2,9 @@ import 'package:assignmen_1/Screens/login.dart';
 import 'package:assignmen_1/Screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../main.dart';
 
 class Auth extends StatefulWidget {
   const Auth({super.key});
@@ -38,7 +41,8 @@ class Authstate extends State {
                     borderRadius: BorderRadius.circular(50),
                   ),
                 ),
-                onPressed: () {
+                onPressed: () async {
+                  
                   Get.to(() => const Login());
                 },
                 child: const Text(

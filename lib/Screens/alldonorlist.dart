@@ -12,8 +12,8 @@ class Alldonor extends StatelessWidget {
     final controller = Profilecontroller.instance;
     return Scaffold(
       body: SingleChildScrollView(
-        child: SafeArea(
-            child: Container(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: FutureBuilder<List<UserDonor>>(
               future: controller.getalluser(),
@@ -26,12 +26,19 @@ class Alldonor extends StatelessWidget {
                         itemBuilder: (c, index) {
                           return Column(
                             children: <Widget>[
-                              ListTile(
-                                leading: Text(snapshot.data![index].Bloodgroup),
-                                title: Text(snapshot.data![index].Name),
-                                subtitle: Text(snapshot.data![index].Number),
-                                trailing: Text(snapshot.data![index].City +
-                                    snapshot.data![index].Area),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: ListTile(
+                                  leading:
+                                      Text(snapshot.data![index].Bloodgroup),
+                                  title: Text(snapshot.data![index].Name),
+                                  subtitle: Text(snapshot.data![index].Number),
+                                  trailing: Text(snapshot.data![index].City +
+                                      snapshot.data![index].Area),
+                                ),
                               ),
                             ],
                           );
@@ -48,7 +55,7 @@ class Alldonor extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               }),
-        )),
+        ),
       ),
     );
   }
