@@ -1,8 +1,10 @@
 import 'package:assignmen_1/Screens/Home.dart';
 import 'package:assignmen_1/model/methodefile.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../repository/donorrepository.dart';
 
 class Donor extends StatefulWidget {
   const Donor({super.key});
@@ -166,14 +168,16 @@ class Donorstate extends State {
                       borderRadius: BorderRadius.circular(50),
                     ),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
+                    // ignore: non_constant_identifier_names
                     final User = UserDonor(
-                        Name: name.toString(),
-                        Bloodgroup: bloodgroup.toString(),
-                        City: city.toString(),
-                        Area: area.toString(),
-                        Number: number.toString());
-                    Get.off(() => const Home());
+                        Name: name.text,
+                        Bloodgroup: bloodgroup.text,
+                        City: city.text,
+                        Area: area.text,
+                        Number: number.text);
+                    await Donorrepository().CreateDonor(User);
+                    Get.offAll(() => const Home());
                   },
                   child: const Text(
                     'Submit',

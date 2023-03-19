@@ -1,7 +1,11 @@
 // model
 
+// ignore_for_file: non_constant_identifier_names
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserDonor {
-  final int? id;
+  final String? id;
   final String Name;
   final String Bloodgroup;
   final String City;
@@ -24,5 +28,18 @@ class UserDonor {
       'City': City,
       'Area': Area,
     };
+  }
+
+  factory UserDonor.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
+    final data = document.data()!;
+    return UserDonor(
+      id: document.id,
+      Name: data['Name'],
+      Number: data['Number'],
+      Bloodgroup: data['Blood Group'],
+      City: data['City'],
+      Area: data['Area'],
+    );
   }
 }
