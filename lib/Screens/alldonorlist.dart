@@ -14,6 +14,7 @@ class Alldonor extends StatelessWidget {
       body: SingleChildScrollView(
         child: SafeArea(
             child: Container(
+
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: FutureBuilder<List<UserDonor>>(
               future: controller.getalluser(),
