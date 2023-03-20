@@ -14,6 +14,11 @@ class Home extends StatelessWidget {
     // ignore: todo
     // TODO: implement build
     return Scaffold(
+      drawer: const Drawer(
+        child: Center(
+          child: Text('Data'),
+        ),
+      ),
       appBar: AppBar(
         title: const Text(
           'Welcome',

@@ -11,9 +11,9 @@ class Alldonor extends StatelessWidget {
     // TODO: implement build
     final controller = Profilecontroller.instance;
     return Scaffold(
-      body: SingleChildScrollView(
+        body: SingleChildScrollView(
+      child: SafeArea(
         child: Container(
-          width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: FutureBuilder<List<UserDonor>>(
               future: controller.getalluser(),
@@ -57,6 +57,6 @@ class Alldonor extends StatelessWidget {
               }),
         ),
       ),
-    );
+    ));
   }
 }
