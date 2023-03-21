@@ -74,7 +74,6 @@ class Donorstate extends State {
                 child: TextFormField(
                   controller: number,
                   keyboardType: TextInputType.name,
-                  obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50.0),

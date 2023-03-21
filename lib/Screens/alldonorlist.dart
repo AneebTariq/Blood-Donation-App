@@ -2,12 +2,20 @@ import 'package:assignmen_1/model/methodefile.dart';
 import 'package:assignmen_1/model/profilecontroller.dart';
 import 'package:flutter/material.dart';
 
-class Alldonor extends StatelessWidget {
+class Alldonor extends StatefulWidget {
   const Alldonor({super.key});
 
   @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return Alldonorstate();
+  }
+}
+
+class Alldonorstate extends State {
+  String name = '';
+  @override
   Widget build(BuildContext context) {
-    // ignore: todo
     // TODO: implement build
     final controller = Profilecontroller.instance;
     return Scaffold(

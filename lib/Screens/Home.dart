@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:assignmen_1/Screens/Accepter.dart';
+import 'package:assignmen_1/Screens/searchscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -76,7 +76,7 @@ class Home extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Get.to(() => const Accepter());
+                Get.to(() => SearchScreen());
               },
               child: const Text(
                 'Accepter',
