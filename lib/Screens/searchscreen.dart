@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -108,12 +110,14 @@ class _SearchScreenState extends State {
               child: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('Donor')
-                .where('Blood Group', isGreaterThanOrEqualTo: query)
+                .where('Blood Group', isEqualTo: query)
                 .where('City', isEqualTo: query1)
-                .where('Area ', isEqualTo: query2)
+                .where('Area', isEqualTo: query2)
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
+
+                log("error in snapshot");
                 return Text('Error: ${snapshot.error}');
               }
 
@@ -122,6 +126,7 @@ class _SearchScreenState extends State {
               }
 
               List<DocumentSnapshot> docs = snapshot.data!.docs;
+              log("${docs.length}");
 
               return ListView.builder(
                 itemCount: docs.length,
