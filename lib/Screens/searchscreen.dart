@@ -14,6 +14,8 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State {
   String query = '';
+  String query1 = '';
+  String query2 = '';
 
   @override
   Widget build(BuildContext context) {
@@ -23,35 +25,92 @@ class _SearchScreenState extends State {
           backgroundColor: Colors.red,
         ),
         body: Column(children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: TextField(
-                onChanged: (value) {
-                  setState(() {
-                    query = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50.0),
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SizedBox(
+                  width: 100,
+                  child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        query = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.red),
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                      hintStyle: const TextStyle(color: Colors.red),
+                      hintText: 'Blood Group...',
+                    ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.red),
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                  hintStyle: const TextStyle(color: Colors.red),
-                  hintText: 'Search...',
                 ),
               ),
-            ),
+              // City search field
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SizedBox(
+                  width: 120,
+                  child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        query1 = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.red),
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                      hintStyle: const TextStyle(color: Colors.red),
+                      hintText: 'City...',
+                    ),
+                  ),
+                ),
+              ),
+              // Area Search Field
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SizedBox(
+                  width: 120,
+                  child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        query2 = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.red),
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                      hintStyle: const TextStyle(color: Colors.red),
+                      hintText: 'Area...',
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
+          // data search from firestor
           Expanded(
               child: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('Donor')
                 .where('Blood Group', isGreaterThanOrEqualTo: query)
+                .where('City', isEqualTo: query1)
+                .where('Area ', isEqualTo: query2)
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
@@ -68,6 +127,7 @@ class _SearchScreenState extends State {
                 itemCount: docs.length,
                 itemBuilder: (context, index) {
                   DocumentSnapshot doc = docs[index];
+                  // data shown in List Tile
                   return ListTile(
                     title: Text(doc['Blood Group']),
                     leading: Text(doc['Name']),
