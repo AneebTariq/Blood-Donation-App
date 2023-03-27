@@ -1,13 +1,11 @@
 // ignore_for_file: file_names
 
-import 'package:assignmen_1/Screens/searchscreen.dart';
+import 'package:assignmen_1/Screens/Accepter/searchscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../forms/donorform.dart';
-
-class Home extends StatelessWidget {
-  const Home({super.key});
+class AccepterHome extends StatelessWidget {
+  const AccepterHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,25 +44,6 @@ class Home extends StatelessWidget {
               child: Image.asset('assets/images/first.png'),
             ),
             const SizedBox(
-              height: 40,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                fixedSize: const Size(350, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
-              ),
-              onPressed: () {
-                Get.to(() => const Donor());
-              },
-              child: const Text(
-                'Donor',
-                style: TextStyle(fontSize: 25),
-              ),
-            ),
-            const SizedBox(
               height: 20,
             ),
             ElevatedButton(
@@ -76,7 +55,7 @@ class Home extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Get.to(() => SearchScreen());
+                Get.to(() => const SearchScreen());
               },
               child: const Text(
                 'Accepter',

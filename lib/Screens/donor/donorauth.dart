@@ -1,13 +1,11 @@
-import 'package:assignmen_1/Screens/login.dart';
-import 'package:assignmen_1/Screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../main.dart';
+import 'donorlogin.dart';
+import 'donorregister.dart';
 
-class Auth extends StatefulWidget {
-  const Auth({super.key});
+class DonorAuth extends StatefulWidget {
+  const DonorAuth({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -42,8 +40,7 @@ class Authstate extends State {
                   ),
                 ),
                 onPressed: () async {
-                  
-                  Get.to(() => const Login());
+                  Get.to(() => const DonorLogin());
                 },
                 child: const Text(
                   'Login',
@@ -63,7 +60,7 @@ class Authstate extends State {
                 ),
               ),
               onPressed: () {
-                Get.to(() => const Register());
+                Get.to(() => const DonorRegister());
               },
               child: const Text(
                 'Register',

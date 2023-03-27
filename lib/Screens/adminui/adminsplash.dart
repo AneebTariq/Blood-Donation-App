@@ -1,10 +1,7 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:assignmen_1/Screens/Home.dart';
-import 'package:assignmen_1/Screens/auth.dart';
 import 'package:assignmen_1/shared_pref/shared_pref.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -62,9 +59,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Timer(Duration(seconds: 3), () {
       if (status) {
-        Get.offAll(() => const Home());
+        // Get.offAll(() => const Home());
       } else {
-        Get.offAll(() => Auth());
+        // Get.offAll(() => Auth());
       }
     });
   }

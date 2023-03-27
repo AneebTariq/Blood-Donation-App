@@ -1,23 +1,21 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: non_constant_identifier_names, avoid_types_as_parameter_names, duplicate_ignore, avoid_print, unused_local_variable
 
-import 'package:assignmen_1/Screens/Home.dart';
-import 'package:assignmen_1/Screens/register.dart';
 import 'package:assignmen_1/model/user_model.dart';
+import 'package:assignmen_1/shared_pref/shared_pref.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'accepterhome.dart';
+import 'accepterlogin.dart';
 
-import '../shared_pref/shared_pref.dart';
-
-class Login extends StatelessWidget {
-  const Login({super.key});
+class AccepterRegister extends StatelessWidget {
+  const AccepterRegister({super.key});
 
   @override
   Widget build(BuildContext context) {
     // ignore: todo
-    // TODO: implement
-    String email = '', password = '';
-
+    // TODO: implement build
+    String accepteremail = '', accepterpassword = '';
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -26,7 +24,7 @@ class Login extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 100.0),
               child: Image.asset(
-                'assets/images/donate.png',
+                'assets/images/donor.png',
                 height: 300,
               ),
             ),
@@ -36,8 +34,10 @@ class Login extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextFormField(
+                // ignore: avoid_types_as_parameter_names
+                validator: (Value) => Value!.isEmpty ? 'Enter Email' : null,
                 onChanged: (value) {
-                  email = value;
+                  accepteremail = value;
                 },
                 keyboardType: TextInputType.emailAddress,
                 focusNode: FocusNode(),
@@ -67,8 +67,9 @@ class Login extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextFormField(
+                validator: (Value) => Value!.isEmpty ? 'Enter password' : null,
                 onChanged: (value) {
-                  password = value;
+                  accepterpassword = value;
                 },
                 keyboardType: TextInputType.name,
                 obscureText: true,
@@ -111,41 +112,36 @@ class Login extends StatelessWidget {
                 ),
                 onPressed: () async {
                   try {
-                    // ignore: unused_local_variable
-                    final credential =
-                        await FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: email,
-                      password: password,
+                    final credential = await FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(
+                      email: accepteremail,
+                      password: accepterpassword,
                     );
                     await SharedPrefClient().setUser(UserModel(
                         credential.user!.uid, credential.user!.email!));
-                    Get.offAll(() => const Home());
+                    Get.offAll(() => const AccepterHome());
                   } on FirebaseAuthException catch (e) {
-                    if (e.code == 'user-not-found') {
-                      print('No user found for that email.');
-                    } else if (e.code == 'wrong-password') {
-                      print('Wrong password provided for that user.');
+                    if (e.code == 'weak-password') {
+                      print('The password provided is too weak.');
+                    } else if (e.code == 'email-already-in-use') {
+                      print('The account already exists for that email.');
                     }
+                  } catch (e) {
+                    print(e);
                   }
                 },
-                child: const Text(
-                  'Login',
-                  style: TextStyle(fontSize: 25),
-                )),
-            const SizedBox(
-              height: 10,
-            ),
+                child: const Text('Register')),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Do not have account?'),
+              children: <Widget>[
+                const Text('Allready have account?'),
                 TextButton(
                   onPressed: () {
-                    Get.to(const Register());
+                    Get.to(const AccepterLogin());
                   },
                   child: const Text(
-                    'Register',
+                    'Login',
                     style: TextStyle(color: Colors.red),
                   ),
                 ),

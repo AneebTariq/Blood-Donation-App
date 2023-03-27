@@ -1,9 +1,7 @@
-import 'package:assignmen_1/Screens/Home.dart';
 import 'package:assignmen_1/model/methodefile.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../Screens/donor/donorhome.dart';
 import '../repository/donorrepository.dart';
 
 class Donor extends StatefulWidget {
@@ -176,7 +174,7 @@ class Donorstate extends State {
                         Area: area.text,
                         Number: number.text);
                     await Donorrepository().CreateDonor(User);
-                    Get.offAll(() => const Home());
+                    Get.offAll(() => const DonorHome());
                   },
                   child: const Text(
                     'Submit',

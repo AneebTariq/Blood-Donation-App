@@ -1,6 +1,8 @@
-import 'package:assignmen_1/Screens/splash_screen.dart';
+import 'package:assignmen_1/Screens/adminui/adminlogin.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'Accepter/acceptersplash.dart';
+import 'donor/donorsplash.dart';
 
 class Selected extends StatelessWidget {
   const Selected({super.key});
@@ -22,7 +24,9 @@ class Selected extends StatelessWidget {
                 child: Column(
                   children: [
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(() => AdminLogin());
+                      },
                       child: const Text('Login as Admin'),
                     ),
                     const Padding(
@@ -68,7 +72,7 @@ class Selected extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Get.to(() => const SplashScreen());
+                    Get.to(() => const DonorSplashScreen());
                   },
                   child: const Text(
                     'Donor',
@@ -92,7 +96,7 @@ class Selected extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Get.to(() => const SplashScreen());
+                    Get.to(() => const AccepterSplashScreen());
                   },
                   child: const Text(
                     'Accepter',
