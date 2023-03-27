@@ -1,10 +1,10 @@
 // ignore_for_file: non_constant_identifier_names, avoid_types_as_parameter_names, duplicate_ignore, avoid_print, unused_local_variable
 
-import 'package:assignmen_1/model/user_model.dart';
 import 'package:assignmen_1/shared_pref/shared_pref.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../model/user_model.dart';
 import 'accepterhome.dart';
 import 'accepterlogin.dart';
 
@@ -117,7 +117,7 @@ class AccepterRegister extends StatelessWidget {
                       email: accepteremail,
                       password: accepterpassword,
                     );
-                    await SharedPrefClient().setUser(UserModel(
+                    await SharedPrefClient().setUseraccepter(AccepterUserModel(
                         credential.user!.uid, credential.user!.email!));
                     Get.offAll(() => const AccepterHome());
                   } on FirebaseAuthException catch (e) {

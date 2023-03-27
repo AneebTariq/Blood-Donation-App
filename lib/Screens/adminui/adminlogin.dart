@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print
-import 'package:assignmen_1/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../model/donor_user_model.dart';
 import '../../shared_pref/shared_pref.dart';
 import 'adminhome.dart';
 
@@ -16,7 +16,7 @@ class AdminLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: todo
     // TODO: implement
-    String email = '', password = '';
+    String adminemail = '', adminpassword = '';
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -37,7 +37,7 @@ class AdminLogin extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextFormField(
                 onChanged: (value) {
-                  email = value;
+                  adminemail = value;
                 },
                 keyboardType: TextInputType.emailAddress,
                 focusNode: FocusNode(),
@@ -68,7 +68,7 @@ class AdminLogin extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextFormField(
                 onChanged: (value) {
-                  password = value;
+                  adminpassword = value;
                 },
                 keyboardType: TextInputType.name,
                 obscureText: true,
@@ -110,16 +110,16 @@ class AdminLogin extends StatelessWidget {
                   ),
                 ),
                 onPressed: () async {
-                  if (email == email) {
-                    if (password == password) {
+                  if (adminemail == adminemail) {
+                    if (adminpassword == adminpassword) {
                       try {
                         // ignore: unused_local_variable
                         final credential = await FirebaseAuth.instance
                             .signInWithEmailAndPassword(
-                          email: email,
-                          password: password,
+                          email: adminemail,
+                          password: adminpassword,
                         );
-                        await SharedPrefClient().setUser(UserModel(
+                        await SharedPrefClient().setUser(DonorUserModel(
                             credential.user!.uid, credential.user!.email!));
                         Get.offAll(() => AdminHome());
                       } on FirebaseAuthException catch (e) {

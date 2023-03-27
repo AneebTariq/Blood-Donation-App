@@ -1,32 +1,60 @@
 import 'package:shared_preferences/shared_preferences.dart';
-
+import '../model/donor_user_model.dart';
 import '../model/user_model.dart';
 
 class SharedPrefClient {
-  static const userId = 'userId';
-  static const email = 'email';
+  static const donoruserId = 'donoruserId';
+  static const donoremail = 'donoremail';
 
   Future<bool> isUserLoggedIn() async {
     final sharedPref = await SharedPreferences.getInstance();
-    final userToken = sharedPref.getString(userId);
+    final userToken = sharedPref.getString(donoruserId);
     return userToken != null;
   }
 
-  Future<UserModel> getUser() async {
+  Future<DonorUserModel> getUser() async {
     final sharedPref = await SharedPreferences.getInstance();
-    final id = sharedPref.getString(userId);
-    final mail = sharedPref.getString(email);
-    return UserModel(id!, mail!);
+    final id = sharedPref.getString(donoruserId);
+    final mail = sharedPref.getString(donoremail);
+    return DonorUserModel(id!, mail!);
   }
 
-  Future<void> setUser(UserModel user) async {
+  Future<void> setUser(DonorUserModel user) async {
     final sharedPref = await SharedPreferences.getInstance();
-    await sharedPref.setString(userId, user.userId);
-    await sharedPref.setString(email, user.email);
+    await sharedPref.setString(donoruserId, user.donoruserId);
+    await sharedPref.setString(donoremail, user.donoremail);
   }
 
   Future<void> clearUser() async {
     final sharedPref = await SharedPreferences.getInstance();
-    await sharedPref.remove(userId);
+    await sharedPref.remove(donoruserId);
+  }
+
+  //accepter shared prefrances
+  static const accepteruserId = 'accepteruserId';
+  static const accepteremail = 'accepteremail';
+
+  Future<bool> isUserLoggedInaccepter() async {
+    final sharedPref = await SharedPreferences.getInstance();
+    final userToken = sharedPref.getString(accepteruserId);
+    return userToken != null;
+  }
+
+  Future<AccepterUserModel> getUseraccepter() async {
+    final sharedPref = await SharedPreferences.getInstance();
+    final id = sharedPref.getString(accepteruserId);
+    final mail = sharedPref.getString(accepteremail);
+    return AccepterUserModel(id!, mail!);
+  }
+
+  Future<void> setUseraccepter(AccepterUserModel user) async {
+    final sharedPref = await SharedPreferences.getInstance();
+    await sharedPref.setString(accepteruserId, user.accepteruserId);
+    await sharedPref.setString(accepteremail, user.accepteremail);
+  }
+
+  Future<void> clearUseraccepter() async {
+    final sharedPref = await SharedPreferences.getInstance();
+    await sharedPref.remove(accepteruserId);
   }
 }

@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print
-import 'package:assignmen_1/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../model/donor_user_model.dart';
 import '../../shared_pref/shared_pref.dart';
 import 'donorhome.dart';
 import 'donorregister.dart';
@@ -115,7 +115,7 @@ class DonorLogin extends StatelessWidget {
                       email: donoremail,
                       password: donorpassword,
                     );
-                    await SharedPrefClient().setUser(UserModel(
+                    await SharedPrefClient().setUser(DonorUserModel(
                         credential.user!.uid, credential.user!.email!));
                     Get.offAll(() => const DonorHome());
                   } on FirebaseAuthException catch (e) {

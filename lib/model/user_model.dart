@@ -1,6 +1,6 @@
-class UserModel{
-  final String userId;
-  final String email;
+class AccepterUserModel {
+  final String accepteruserId;
+  final String accepteremail;
 
-  UserModel(this.userId,this.email);
+  AccepterUserModel(this.accepteruserId, this.accepteremail);
 }
