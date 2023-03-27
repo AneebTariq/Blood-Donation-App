@@ -1,9 +1,6 @@
 // ignore_for_file: avoid_print
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../model/donor_user_model.dart';
-import '../../shared_pref/shared_pref.dart';
 import 'adminhome.dart';
 
 // ignore: must_be_immutable
@@ -16,7 +13,7 @@ class AdminLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: todo
     // TODO: implement
-    String adminemail = '', adminpassword = '';
+    //String adminemail = '', adminpassword = '';
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -37,7 +34,7 @@ class AdminLogin extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextFormField(
                 onChanged: (value) {
-                  adminemail = value;
+                  // adminemail = value;
                 },
                 keyboardType: TextInputType.emailAddress,
                 focusNode: FocusNode(),
@@ -68,7 +65,7 @@ class AdminLogin extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextFormField(
                 onChanged: (value) {
-                  adminpassword = value;
+                  // adminpassword = value;
                 },
                 keyboardType: TextInputType.name,
                 obscureText: true,
@@ -109,29 +106,30 @@ class AdminLogin extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50),
                   ),
                 ),
-                onPressed: () async {
-                  if (adminemail == adminemail) {
-                    if (adminpassword == adminpassword) {
-                      try {
-                        // ignore: unused_local_variable
-                        final credential = await FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
-                          email: adminemail,
-                          password: adminpassword,
-                        );
-                        await SharedPrefClient().setUser(DonorUserModel(
-                            credential.user!.uid, credential.user!.email!));
-                        Get.offAll(() => AdminHome());
-                      } on FirebaseAuthException catch (e) {
-                        if (e.code == 'user-not-found') {
-                          print('No user found for that email.');
-                        } else if (e.code == 'wrong-password') {
-                          print('Wrong password provided for that user.');
-                        }
-                      }
-                    }
-                  } else
-                    return print('not login');
+                onPressed: () {
+                  Get.to(() => const AdminHome());
+                  //   if (adminemail == adminemail) {
+                  //     if (adminpassword == adminpassword) {
+                  //       try {
+                  //         // ignore: unused_local_variable
+                  //         final credential = await FirebaseAuth.instance
+                  //             .signInWithEmailAndPassword(
+                  //           email: adminemail,
+                  //           password: adminpassword,
+                  //         );
+                  //         await SharedPrefClient().setUser(DonorUserModel(
+                  //             credential.user!.uid, credential.user!.email!));
+                  //         Get.offAll(() => const AdminHome());
+                  //       } on FirebaseAuthException catch (e) {
+                  //         if (e.code == 'user-not-found') {
+                  //           print('No user found for that email.');
+                  //         } else if (e.code == 'wrong-password') {
+                  //           print('Wrong password provided for that user.');
+                  //         }
+                  //       }
+                  //     }
+                  //   } else
+                  //     return print('not login');
                 },
                 child: const Text(
                   'Login',

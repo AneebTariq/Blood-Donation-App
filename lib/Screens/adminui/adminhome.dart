@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'acceptersscreen.dart';
+import 'donorsscreen.dart';
 
 class AdminHome extends StatefulWidget {
+  const AdminHome({super.key});
+
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return AdminHomeState();
   }
 }
@@ -11,19 +14,33 @@ class AdminHome extends StatefulWidget {
 class AdminHomeState extends State {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Admin Page'),
-      ),
-      body: Center(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          decoration: const BoxDecoration(
-            color: Colors.lightGreen,
-          ),
-          child: const Text('Data needed'),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Admin Page'),
+        ),
+        body: Column(
+          children: const <Widget>[
+            TabBar(tabs: [
+              Tab(
+                icon: Icon(Icons.person),
+                //child: Text('Donors'),
+              ),
+              Tab(
+                icon: Icon(Icons.person),
+                // child: Text('Accepters'),
+              )
+            ]),
+            Expanded(
+              child: TabBarView(children: [
+                //Accepters
+                Accepters(),
+                //Donors
+                Donors(),
+              ]),
+            )
+          ],
         ),
       ),
     );

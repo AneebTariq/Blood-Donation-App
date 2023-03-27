@@ -1,4 +1,4 @@
-import 'package:assignmen_1/Screens/adminui/adminlogin.dart';
+import 'package:assignmen_1/Screens/adminui/adminhome.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'Accepter/acceptersplash.dart';
@@ -9,11 +9,12 @@ class Selected extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: todo
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          '',
+          'Donor & Accepter App',
           style: TextStyle(color: Colors.black),
         ),
         actions: [
@@ -25,7 +26,7 @@ class Selected extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () {
-                        Get.to(() => AdminLogin());
+                        Get.to(() => const AdminHome());
                       },
                       child: const Text('Login as Admin'),
                     ),
