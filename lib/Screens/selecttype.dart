@@ -1,4 +1,4 @@
-import 'package:assignmen_1/Screens/adminui/adminhome.dart';
+import 'package:assignmen_1/Screens/adminui/adminlogin.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'Accepter/acceptersplash.dart';
@@ -26,7 +26,7 @@ class Selected extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () {
-                        Get.to(() => const AdminHome());
+                        Get.to(() => const AdminLogin());
                       },
                       child: const Text('Login as Admin'),
                     ),

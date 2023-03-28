@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../model/admin_user_helper.dart';
 import 'adminhome.dart';
 
 // ignore: must_be_immutable
@@ -13,15 +14,18 @@ class AdminLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: todo
     // TODO: implement
-    //String adminemail = '', adminpassword = '';
-
+    Adminhelper adminhelper = Adminhelper();
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title: const Text('Login'),
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: 100.0),
+              padding: const EdgeInsets.only(top: 20.0),
               child: Image.asset(
                 'assets/images/donate.png',
                 height: 300,
@@ -33,9 +37,7 @@ class AdminLogin extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextFormField(
-                onChanged: (value) {
-                  // adminemail = value;
-                },
+                controller: adminhelper.adminemail,
                 keyboardType: TextInputType.emailAddress,
                 focusNode: FocusNode(),
                 autofocus: true,
@@ -64,9 +66,7 @@ class AdminLogin extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextFormField(
-                onChanged: (value) {
-                  // adminpassword = value;
-                },
+                controller: adminhelper.adminpassword,
                 keyboardType: TextInputType.name,
                 obscureText: true,
                 decoration: InputDecoration(
@@ -107,29 +107,12 @@ class AdminLogin extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Get.to(() => const AdminHome());
-                  //   if (adminemail == adminemail) {
-                  //     if (adminpassword == adminpassword) {
-                  //       try {
-                  //         // ignore: unused_local_variable
-                  //         final credential = await FirebaseAuth.instance
-                  //             .signInWithEmailAndPassword(
-                  //           email: adminemail,
-                  //           password: adminpassword,
-                  //         );
-                  //         await SharedPrefClient().setUser(DonorUserModel(
-                  //             credential.user!.uid, credential.user!.email!));
-                  //         Get.offAll(() => const AdminHome());
-                  //       } on FirebaseAuthException catch (e) {
-                  //         if (e.code == 'user-not-found') {
-                  //           print('No user found for that email.');
-                  //         } else if (e.code == 'wrong-password') {
-                  //           print('Wrong password provided for that user.');
-                  //         }
-                  //       }
-                  //     }
-                  //   } else
-                  //     return print('not login');
+                  // ignore: unrelated_type_equality_checks
+                  if (adminhelper.adminemail != '' &&
+                      // ignore: unrelated_type_equality_checks
+                      adminhelper.adminpassword != '') {
+                    adminhelper.adminlogin(context);
+                  }
                 },
                 child: const Text(
                   'Login',

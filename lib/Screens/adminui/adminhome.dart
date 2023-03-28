@@ -18,17 +18,25 @@ class AdminHomeState extends State {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.red,
           title: const Text('Admin Page'),
         ),
         body: Column(
           children: const <Widget>[
             TabBar(tabs: [
               Tab(
-                icon: Icon(Icons.person),
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.black,
+                ),
                 //child: Text('Donors'),
               ),
               Tab(
-                icon: Icon(Icons.person),
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.black,
+                ),
                 // child: Text('Accepters'),
               )
             ]),
