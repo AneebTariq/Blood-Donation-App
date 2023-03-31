@@ -4,6 +4,8 @@ import 'package:assignmen_1/Screens/Accepter/searchscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../selecttype.dart';
+
 class AccepterHome extends StatelessWidget {
   const AccepterHome({super.key});
 
@@ -12,9 +14,17 @@ class AccepterHome extends StatelessWidget {
     // ignore: todo
     // TODO: implement build
     return Scaffold(
-      drawer: const Drawer(
+      drawer: Drawer(
         child: Center(
-          child: Text('Data'),
+          child: GestureDetector(
+            child: const Text(
+              'Go to Donor',
+              style: TextStyle(fontSize: 20),
+            ),
+            onTap: () {
+              Get.off(() => const Selected());
+            },
+          ),
         ),
       ),
       appBar: AppBar(

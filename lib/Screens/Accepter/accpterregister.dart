@@ -138,7 +138,7 @@ class AccepterRegister extends StatelessWidget {
                 const Text('Allready have account?'),
                 TextButton(
                   onPressed: () {
-                    Get.to(const AccepterLogin());
+                    Get.to(() => const AccepterLogin());
                   },
                   child: const Text(
                     'Login',

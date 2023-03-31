@@ -73,10 +73,34 @@ class _SearchScreenState extends State {
                   itemCount: documents.length,
                   itemBuilder: (BuildContext context, int index) {
                     QueryDocumentSnapshot document = documents[index];
-                    return ListTile(
-                      title: Text(document["Blood Group"]),
-                      subtitle: Text(document["City"]),
-                      trailing: Text(document["Area"]),
+                    bool isselected = false;
+                    return Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: SizedBox(
+                        child: Column(
+                          children: [
+                            ListTile(
+                              title: Text(document["Blood Group"]),
+                              subtitle: Text(document["City"]),
+                              trailing: Text(document["Area"]),
+                            ),
+                            ChoiceChip(
+                              tooltip: 'Request Donor For Donat of Blood',
+                              backgroundColor: Colors.red,
+                              label: const Text(
+                                'R e q u e st',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              selected: isselected,
+                              onSelected: (newselected) {
+                                setState(() {
+                                  isselected = newselected;
+                                });
+                              },
+                            )
+                          ],
+                        ),
+                      ),
                     );
                   },
                 );

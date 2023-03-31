@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../forms/donorform.dart';
+import '../selecttype.dart';
 
 class DonorHome extends StatelessWidget {
   const DonorHome({super.key});
@@ -11,9 +12,17 @@ class DonorHome extends StatelessWidget {
     // ignore: todo
     // TODO: implement build
     return Scaffold(
-      drawer: const Drawer(
+      drawer: Drawer(
         child: Center(
-          child: Text('Data'),
+          child: GestureDetector(
+            child: const Text(
+              'Go  To  Accepter',
+              style: TextStyle(fontSize: 20),
+            ),
+            onTap: () {
+              Get.off(() => const Selected());
+            },
+          ),
         ),
       ),
       appBar: AppBar(
