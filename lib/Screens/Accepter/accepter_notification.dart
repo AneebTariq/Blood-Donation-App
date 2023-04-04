@@ -2,21 +2,19 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Donornotification extends StatefulWidget {
-  const Donornotification({super.key});
+class Accepternotification extends StatefulWidget {
+  const Accepternotification({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return Donornotificationstate();
+    return Accepternotificationstate();
   }
 }
 
-class Donornotificationstate extends State {
+class Accepternotificationstate extends State {
   String myString = '';
-
 // SharedPreferences prefs = await SharedPreferences.getInstance();
 
   @override
@@ -31,17 +29,17 @@ class Donornotificationstate extends State {
 
   Future<void> getData() async {
     SharedPreferences prefs = await getSharedPreferencesInstance();
-    myString = prefs.getString('donoremail') ?? '';
+    myString = prefs.getString('accepteremail') ?? '';
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    String mydonor = myString;
+    String myaccepter = myString;
     final Query<Map<String, dynamic>> usersCollection = FirebaseFirestore
         .instance
         .collection('AccepterRequest')
-        .where('Donorid', isEqualTo: mydonor);
+        .where('Accepterid', isEqualTo: myaccepter);
 
     return Scaffold(
       appBar: AppBar(
@@ -77,7 +75,7 @@ class Donornotificationstate extends State {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -86,43 +84,8 @@ class Donornotificationstate extends State {
                                     borderRadius: BorderRadius.circular(50),
                                   ),
                                 ),
-                                onPressed: () {
-                                  FirebaseFirestore.instance
-                                      .collection('AccepterRequest')
-                                      .where('Donorid', isEqualTo: mydonor)
-                                      .get()
-                                      .then((querySnapshot) {
-                                    querySnapshot.docs
-                                        .forEach((documentSnapshot) {
-                                      documentSnapshot.reference
-                                          .update({'Status': true});
-                                    });
-                                  });
-                                  Get.snackbar(
-                                      'Approved', 'You have aproved it',
-                                      backgroundColor: Colors.red,
-                                      colorText: Colors.white,
-                                      snackPosition: SnackPosition.BOTTOM);
-                                },
-                                child: const Text(' A p p r o v e '),
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.red,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Get.snackbar(
-                                    'Rejected',
-                                    'You have Rejected it',
-                                    backgroundColor: Colors.red,
-                                    colorText: Colors.white,
-                                    snackPosition: SnackPosition.BOTTOM,
-                                  );
-                                },
-                                child: const Text(' R e j e c t '),
+                                onPressed: () {},
+                                child: const Text(' A p p r o v e d'),
                               ),
                             ],
                           ),

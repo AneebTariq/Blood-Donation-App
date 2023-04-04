@@ -1,4 +1,5 @@
 // ignore_for_file: file_names
+import 'package:assignmen_1/Screens/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../forms/donorform.dart';
@@ -27,7 +28,7 @@ class DonorHome extends StatelessWidget {
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-                Get.to(() => const Selected());
+                Get.offAll(() => const Selected());
               },
             ),
             ListTile(
@@ -44,7 +45,9 @@ class DonorHome extends StatelessWidget {
                 'N o t i f i c a t i o n ',
                 style: TextStyle(fontSize: 18),
               ),
-              onTap: () {},
+              onTap: () {
+                Get.to(() => const Donornotification());
+              },
             ),
           ],
         ),

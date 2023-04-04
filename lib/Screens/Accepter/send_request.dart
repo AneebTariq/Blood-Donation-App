@@ -1,10 +1,16 @@
+// ignore_for_file: non_constant_identifier_names
+
+import 'package:assignmen_1/Screens/Accepter/searchscreen.dart';
 import 'package:assignmen_1/model/accepter_request_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../repository/request_repository.dart';
 import 'accepterhome.dart';
 
 class Requesttodonor extends StatefulWidget {
+  const Requesttodonor({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return Requesttodonorstate();
@@ -15,8 +21,29 @@ class Requesttodonorstate extends State {
   TextEditingController AccepName = TextEditingController();
   TextEditingController Address = TextEditingController();
 
+  final args = Get.arguments as MyPageArguments;
+  String myString = '';
+// SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future<SharedPreferences> getSharedPreferencesInstance() async {
+    return await SharedPreferences.getInstance();
+  }
+
+  Future<void> getData() async {
+    SharedPreferences prefs = await getSharedPreferencesInstance();
+    myString = prefs.getString('accepteremail') ?? '';
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    String myaccepemail = myString;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Request to Donor'),
@@ -26,7 +53,7 @@ class Requesttodonorstate extends State {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('Donorid'),
+            Text('email:${args.donorid}'),
             const SizedBox(
               height: 10,
             ),
@@ -102,7 +129,9 @@ class Requesttodonorstate extends State {
                     final acceptrequest = UserRequest(
                       AccepName: AccepName.text,
                       Address: Address.text,
-                      Donorid: 'Aneeb',
+                      Donorid: args.donorid,
+                      Accepterid: myaccepemail,
+                      Status: false,
                     );
                     await Requestrepository().CreateDonor(acceptrequest);
                     Get.offAll(() => const AccepterHome());

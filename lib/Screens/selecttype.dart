@@ -68,6 +68,7 @@ class Selected extends StatelessWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
+                    fixedSize: const Size(350, 60),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
                     ),
@@ -77,7 +78,7 @@ class Selected extends StatelessWidget {
                   },
                   child: const Text(
                     'Donor',
-                    style: TextStyle(fontSize: 25),
+                    style: TextStyle(fontSize: 30),
                   ),
                 ),
               ),
@@ -92,6 +93,7 @@ class Selected extends StatelessWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
+                    fixedSize: const Size(350, 60),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
                     ),
@@ -101,7 +103,7 @@ class Selected extends StatelessWidget {
                   },
                   child: const Text(
                     'Accepter',
-                    style: TextStyle(fontSize: 25),
+                    style: TextStyle(fontSize: 30),
                   ),
                 ),
               ),

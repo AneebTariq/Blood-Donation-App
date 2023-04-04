@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_string_interpolations
+
 import 'package:assignmen_1/Screens/Accepter/send_request.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -144,8 +146,12 @@ class _SearchScreenState extends State {
                                 ),
                               ),
                               onPressed: () {
-                                String donorid = document['Name'];
-                                Get.to(() => Requesttodonor());
+                                String mydonorid = document['Donoremail'];
+                                print(document['Donoremail']);
+                                Get.to(() => const Requesttodonor(),
+                                    arguments:
+                                        MyPageArguments(donorid: '$mydonorid'));
+                                setState(() {});
                               },
                               child: const Text(
                                 ' R e q u e s t ',
@@ -165,4 +171,12 @@ class _SearchScreenState extends State {
       ),
     );
   }
+}
+
+class MyPageArguments {
+  final String donorid;
+
+  MyPageArguments({
+    required this.donorid,
+  });
 }
