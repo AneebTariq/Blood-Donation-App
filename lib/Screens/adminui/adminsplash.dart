@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 import 'dart:io';
 import 'package:assignmen_1/shared_pref/shared_pref.dart';
@@ -24,11 +26,11 @@ class _SplashScreenState extends State<SplashScreen> {
         backgroundColor: Colors.white,
         body: Column(
           children: [
-            Spacer(),
+            const Spacer(),
             Center(
               child: Image.asset('assets/images/blood_donation.png'),
             ),
-            Spacer(),
+            const Spacer(),
           ],
         ),
       ),
@@ -41,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
     bool falgConnected = false;
     try {
       final result = await InternetAddress.lookup('example.com')
-          .timeout(Duration(seconds: 30));
+          .timeout(const Duration(seconds: 30));
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         falgConnected = true;
       }
@@ -57,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void _checkSessionAndProceed() async {
     bool status = await SharedPrefClient().isUserLoggedIn();
 
-    Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       if (status) {
         // Get.offAll(() => const Home());
       } else {

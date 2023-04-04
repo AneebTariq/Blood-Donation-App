@@ -1,6 +1,9 @@
+import 'package:assignmen_1/model/donor_user_model.dart';
 import 'package:assignmen_1/model/methodefile.dart';
+import 'package:assignmen_1/shared_pref/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Screens/donor/donorhome.dart';
 import '../repository/donorrepository.dart';
 
@@ -16,6 +19,25 @@ class Donor extends StatefulWidget {
 }
 
 class Donorstate extends State {
+  String myString = '';
+// SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future<SharedPreferences> getSharedPreferencesInstance() async {
+    return await SharedPreferences.getInstance();
+  }
+
+  Future<void> getData() async {
+    SharedPreferences prefs = await getSharedPreferencesInstance();
+    myString = prefs.getString('donoremail') ?? '';
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     // ignore: todo
@@ -25,6 +47,7 @@ class Donorstate extends State {
     TextEditingController bloodgroup = TextEditingController();
     TextEditingController city = TextEditingController();
     TextEditingController area = TextEditingController();
+    String mydonor = myString;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Donor'),
@@ -172,8 +195,10 @@ class Donorstate extends State {
                         Bloodgroup: bloodgroup.text,
                         City: city.text,
                         Area: area.text,
+                        Donoremail: mydonor,
                         Number: number.text);
                     await Donorrepository().CreateDonor(User);
+                    //await SharedPrefClient().getUser();
                     Get.offAll(() => const DonorHome());
                   },
                   child: const Text(

@@ -13,16 +13,40 @@ class DonorHome extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       drawer: Drawer(
-        child: Center(
-          child: GestureDetector(
-            child: const Text(
-              'Go  To  Accepter',
-              style: TextStyle(fontSize: 20),
+        child: ListView(
+          children: <Widget>[
+            const UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: Colors.red),
+              accountName: Text('Aneeb'),
+              accountEmail: Text('aneebtariq@gmail.com'),
             ),
-            onTap: () {
-              Get.off(() => const Selected());
-            },
-          ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text(
+                'H o m e ',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Get.to(() => const Selected());
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text(
+                'P r o f i l e ',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.notifications_active),
+              title: const Text(
+                'N o t i f i c a t i o n ',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {},
+            ),
+          ],
         ),
       ),
       appBar: AppBar(

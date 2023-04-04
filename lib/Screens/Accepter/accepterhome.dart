@@ -1,9 +1,7 @@
 // ignore_for_file: file_names
-
 import 'package:assignmen_1/Screens/Accepter/searchscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../selecttype.dart';
 
 class AccepterHome extends StatelessWidget {
@@ -15,16 +13,40 @@ class AccepterHome extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       drawer: Drawer(
-        child: Center(
-          child: GestureDetector(
-            child: const Text(
-              'Go to Donor',
-              style: TextStyle(fontSize: 20),
+        child: ListView(
+          children: <Widget>[
+            const UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: Colors.red),
+              accountName: Text('Aneeb'),
+              accountEmail: Text('aneebtariq@gmail.com'),
             ),
-            onTap: () {
-              Get.off(() => const Selected());
-            },
-          ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text(
+                'H o m e ',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Get.to(() => const Selected());
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text(
+                'P r o f i l e ',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.notifications_active),
+              title: const Text(
+                'N o t i f i c a t i o n ',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {},
+            ),
+          ],
         ),
       ),
       appBar: AppBar(
@@ -39,7 +61,7 @@ class AccepterHome extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 40),
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               child: Text(
                 'Welcome To Our App ',
                 style: TextStyle(

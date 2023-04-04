@@ -19,6 +19,7 @@ class Donorrepository extends GetxController {
         colorText: Colors.white,
       );
       Get.off(() => const DonorHome());
+      // ignore: body_might_complete_normally_catch_error
     }).catchError((error, stackTrace) {
       Get.snackbar(
         'Error',

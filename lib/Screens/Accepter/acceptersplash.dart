@@ -27,11 +27,11 @@ class _SplashScreenState extends State<AccepterSplashScreen> {
         backgroundColor: Colors.white,
         body: Column(
           children: [
-            Spacer(),
+            const Spacer(),
             Center(
               child: Image.asset('assets/images/blood_donation.png'),
             ),
-            Spacer(),
+            const Spacer(),
           ],
         ),
       ),
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<AccepterSplashScreen> {
     bool falgConnected = false;
     try {
       final result = await InternetAddress.lookup('example.com')
-          .timeout(Duration(seconds: 30));
+          .timeout(const Duration(seconds: 30));
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         falgConnected = true;
       }
@@ -53,6 +53,7 @@ class _SplashScreenState extends State<AccepterSplashScreen> {
       _checkSessionAndProceed();
       //  _checkLocationAndProceed(context);
     } else {
+      // ignore: avoid_print
       print("no internet");
     }
   }
@@ -60,7 +61,7 @@ class _SplashScreenState extends State<AccepterSplashScreen> {
   void _checkSessionAndProceed() async {
     bool status = await SharedPrefClient().isUserLoggedIn();
 
-    Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       if (status) {
         Get.offAll(() => const AccepterHome());
       } else {

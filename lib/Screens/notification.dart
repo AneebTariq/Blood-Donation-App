@@ -61,17 +61,17 @@ class NotificationServices {
   void firebaseInit(BuildContext context) {
     FirebaseMessaging.onMessage.listen((message) {
       if (kDebugMode) {
-        print("notifications title message.notification!.title");
-        print("notifications body message.notification!.body");
+        print("notifications title:${message.notification!.title}");
+        print("notifications body:${message.notification!.body}");
         print(
-            "notifications channel id message.notification!.android!.channelId");
+            "notifications channel id:${message.notification!.android!.channelId}");
         print(
-            "notifications click action message.notification!.android!.clickAction");
-        print("notifications color message.notification!.android!.color");
-        print("notifications count message.notification!.android!.count");
+            "notifications click action:${message.notification!.android!.clickAction}");
+        print("notifications color:${message.notification!.android!.color}");
+        print("notifications count:${message.notification!.android!.count}");
       }
 
-      // showNotification(message);
+      showNotification(message);
     });
   }
 
@@ -133,6 +133,7 @@ class NotificationServices {
         await FirebaseMessaging.instance.getInitialMessage();
 
     if (initialMessage != null) {
+      // ignore: use_build_context_synchronously
       handleMessage(context, initialMessage);
     }
 

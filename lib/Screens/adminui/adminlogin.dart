@@ -1,8 +1,6 @@
 // ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../model/admin_user_helper.dart';
-import 'adminhome.dart';
 
 // ignore: must_be_immutable
 class AdminLogin extends StatelessWidget {

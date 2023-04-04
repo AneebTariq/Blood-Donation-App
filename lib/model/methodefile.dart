@@ -11,6 +11,7 @@ class UserDonor {
   final String City;
   final String Area;
   final String Number;
+  final String Donoremail;
 
   const UserDonor({
     this.id,
@@ -19,6 +20,7 @@ class UserDonor {
     required this.City,
     required this.Area,
     required this.Number,
+    required this.Donoremail,
   });
   tojason() {
     return {
@@ -27,6 +29,7 @@ class UserDonor {
       'Blood Group': Bloodgroup,
       'City': City,
       'Area': Area,
+      'Donoremail': Donoremail,
     };
   }
 
@@ -40,6 +43,7 @@ class UserDonor {
       Bloodgroup: data['Blood Group'],
       City: data['City'],
       Area: data['Area'],
+      Donoremail: data['Donoremail'],
     );
   }
 }
