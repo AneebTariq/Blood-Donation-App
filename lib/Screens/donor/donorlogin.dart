@@ -1,10 +1,10 @@
 // ignore_for_file: avoid_print
+import 'package:assignmen_1/Screens/donor/donor_Profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../model/donor_user_model.dart';
 import '../../shared_pref/shared_pref.dart';
-import 'donorhome.dart';
 import 'donorregister.dart';
 
 class DonorLogin extends StatelessWidget {
@@ -119,7 +119,7 @@ class DonorLogin extends StatelessWidget {
                     );
                     await SharedPrefClient().setUser(DonorUserModel(
                         credential.user!.uid, credential.user!.email!));
-                    Get.offAll(() => const DonorHome());
+                    Get.offAll(() => const ProfileScreen());
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
                       print('No user found for that email.');

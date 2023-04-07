@@ -77,7 +77,7 @@ class Accepternotificationstate extends State {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -108,6 +108,37 @@ class Accepternotificationstate extends State {
                                       snackPosition: SnackPosition.BOTTOM);
                                 },
                                 child: const Text(' c o m p l e t e d '),
+                              ),
+                              // incomplete donation
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.red,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  String completedstatus = 'InCompleted';
+                                  FirebaseFirestore.instance
+                                      .collection('AccepterRequest')
+                                      .where('Accepterid',
+                                          isEqualTo: myaccepter)
+                                      .get()
+                                      .then((querySnapshot) {
+                                    querySnapshot.docs
+                                        // ignore: avoid_function_literals_in_foreach_calls
+                                        .forEach((documentSnapshot) {
+                                      documentSnapshot.reference
+                                          .update({'Status': completedstatus});
+                                    });
+                                  });
+                                  Get.snackbar('InCompleted',
+                                      ' Blood Donation InCompeted ',
+                                      backgroundColor: Colors.red,
+                                      colorText: Colors.white,
+                                      snackPosition: SnackPosition.BOTTOM);
+                                },
+                                child: const Text(' I n C o m p l e t e d '),
                               ),
                             ],
                           ),

@@ -1,8 +1,8 @@
+import 'package:assignmen_1/Screens/donor/donor_Profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:assignmen_1/model/methodefile.dart';
 import 'package:get/get.dart';
-import '../Screens/donor/donorhome.dart';
 
 class Donorrepository extends GetxController {
   static Donorrepository get instance => Get.find();
@@ -18,7 +18,7 @@ class Donorrepository extends GetxController {
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
-      Get.off(() => const DonorHome());
+      Get.off(() => const ProfileScreen());
       // ignore: body_might_complete_normally_catch_error
     }).catchError((error, stackTrace) {
       Get.snackbar(

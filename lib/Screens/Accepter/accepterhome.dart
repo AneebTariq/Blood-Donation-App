@@ -1,25 +1,52 @@
 // ignore_for_file: file_names
+import 'package:assignmen_1/Screens/Accepter/accepter_history.dart';
 import 'package:assignmen_1/Screens/Accepter/accepter_notification.dart';
 import 'package:assignmen_1/Screens/Accepter/searchscreen.dart';
 import 'package:assignmen_1/Screens/donor/donorsplash.dart';
+import 'package:assignmen_1/shared_pref/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class AccepterHome extends StatelessWidget {
+import '../../model/user_model.dart';
+
+class AccepterHome extends StatefulWidget {
   const AccepterHome({super.key});
 
   @override
+  State<StatefulWidget> createState() {
+    return Accepterhomestate();
+  }
+}
+
+class Accepterhomestate extends State {
+  String myString = '';
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Future<SharedPreferences> getSharedPreferencesInstance() async {
+    return await SharedPreferences.getInstance();
+  }
+
+  Future<void> getData() async {
+    SharedPreferences prefs = await getSharedPreferencesInstance();
+    myString = prefs.getString('donoremail') ?? '';
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // ignore: todo
-    // TODO: implement build
     return Scaffold(
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
             const UserAccountsDrawerHeader(
               decoration: BoxDecoration(color: Colors.red),
-              accountName: Text('Aneeb'),
-              accountEmail: Text('aneebtariq@gmail.com'),
+              accountName: Text(''),
+              accountEmail: Text(' '),
             ),
             ListTile(
               leading: const Icon(Icons.home),
@@ -39,6 +66,16 @@ class AccepterHome extends StatelessWidget {
               ),
               onTap: () {
                 Get.to(() => const Accepternotification());
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.message_outlined),
+              title: const Text(
+                ' H i s t o r y ',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Get.to(() => const Accepterhistory());
               },
             ),
           ],
@@ -85,7 +122,7 @@ class AccepterHome extends StatelessWidget {
                 Get.to(() => const SearchScreen());
               },
               child: const Text(
-                'Accepter',
+                ' Search Donor',
                 style: TextStyle(fontSize: 25),
               ),
             ),

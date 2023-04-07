@@ -4,8 +4,8 @@ import 'package:assignmen_1/shared_pref/shared_pref.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../forms/donorform.dart';
 import '../../model/donor_user_model.dart';
-import 'donorhome.dart';
 import 'donorlogin.dart';
 
 class DonorRegister extends StatelessWidget {
@@ -119,7 +119,7 @@ class DonorRegister extends StatelessWidget {
                     );
                     await SharedPrefClient().setUser(DonorUserModel(
                         credential.user!.uid, credential.user!.email!));
-                    Get.offAll(() => const DonorHome());
+                    Get.offAll(() => const Donor());
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
                       print('The password provided is too weak.');

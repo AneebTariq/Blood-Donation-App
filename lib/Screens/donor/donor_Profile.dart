@@ -1,6 +1,11 @@
+import 'package:assignmen_1/Screens/donor/donor_history.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../Accepter/acceptersplash.dart';
+import '../notification.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -39,6 +44,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .where('Donoremail', isEqualTo: mydonor);
 
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              decoration: const BoxDecoration(color: Colors.red),
+              accountName: const Text('  '),
+              accountEmail: Text(mydonor),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text(
+                ' A c c e p t e r ',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Get.offAll(() => const AccepterSplashScreen());
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.message_outlined),
+              title: const Text(
+                ' I n c o m p l e t e ',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Get.to(() => const Donorhistory());
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.notifications_active),
+              title: const Text(
+                'V i e w    R e q u e s t s ',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Get.to(() => const Donornotification());
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: const Text('Profile'),
         backgroundColor: Colors.red,

@@ -1,12 +1,10 @@
-// ignore_for_file: avoid_print
-
 import 'dart:async';
 import 'dart:io';
+import 'package:assignmen_1/Screens/donor/donor_Profile.dart';
 import 'package:assignmen_1/Screens/donor/donorlogin.dart';
 import 'package:assignmen_1/shared_pref/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'donorhome.dart';
 
 class DonorSplashScreen extends StatefulWidget {
   const DonorSplashScreen({Key? key}) : super(key: key);
@@ -55,6 +53,7 @@ class _SplashScreenState extends State<DonorSplashScreen> {
       _checkSessionAndProceed();
       //  _checkLocationAndProceed(context);
     } else {
+      // ignore: avoid_print
       print("no internet");
     }
   }
@@ -64,7 +63,7 @@ class _SplashScreenState extends State<DonorSplashScreen> {
 
     Timer(const Duration(seconds: 3), () {
       if (status) {
-        Get.offAll(() => const DonorHome());
+        Get.offAll(() => const ProfileScreen());
       } else {
         Get.offAll(() => const DonorLogin());
       }

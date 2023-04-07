@@ -27,19 +27,19 @@ class _SearchScreenState extends State {
     Query query = collectionReference;
 
     String blood = _bloodController.text.trim();
-    String city = _cityController.text.trim();
-    String area = _areaController.text.trim();
+    //String city = _cityController.text.trim();
+    //String area = _areaController.text.trim();
 
     if (blood.isNotEmpty) {
-      query = query.where("Blood Group", isEqualTo: blood.toUpperCase());
+      query = query.where("Blood Group", isEqualTo: blood);
     }
 
-    if (city.isNotEmpty) {
-      query = query.where("City", isEqualTo: city.toUpperCase());
+    if (City.isNotEmpty) {
+      query = query.where("City", isEqualTo: City);
     }
 
-    if (area.isNotEmpty) {
-      query = query.where("Area", isEqualTo: area.toUpperCase());
+    if (Area.isNotEmpty) {
+      query = query.where("Area", isEqualTo: Area);
     }
 
     return query.snapshots();
@@ -49,6 +49,21 @@ class _SearchScreenState extends State {
     setState(() {});
   }
 
+  String Area = '';
+  String City = '';
+  List<String> area = [
+    'Gulbark',
+    'Green Town',
+    'Qartba Chownk',
+    'College Road',
+  ];
+  List<String> city = [
+    'Lahore',
+    'Karachi',
+    'Islamabad',
+  ];
+  String dropdownareaValue = 'Qartba Chownk';
+  String dropdowncityValue = 'Lahore';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,24 +82,58 @@ class _SearchScreenState extends State {
               ),
             ),
           ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 20),
+          //   child: TextField(
+          //     controller: _cityController,
+          //     decoration: const InputDecoration(
+          //       hintText: "Enter City name..",
+          //     ),
+          //   ),
+          // ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: TextField(
-              controller: _cityController,
-              decoration: const InputDecoration(
-                hintText: "Enter City name..",
-              ),
+            padding: const EdgeInsets.all(10.0),
+            child: DropdownButton<String>(
+              isExpanded: true,
+              value: dropdownareaValue,
+              items: area.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                    value: value, child: Text(value));
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  dropdownareaValue = newValue ?? '';
+                  Area = dropdownareaValue;
+                });
+              },
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-            child: TextField(
-              controller: _areaController,
-              decoration: const InputDecoration(
-                hintText: "Enter Area..",
-              ),
+            padding: const EdgeInsets.all(10.0),
+            child: DropdownButton<String>(
+              isExpanded: true,
+              value: dropdowncityValue,
+              items: city.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                    value: value, child: Text(value));
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  dropdowncityValue = newValue ?? '';
+                  City = dropdowncityValue;
+                });
+              },
             ),
           ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          //   child: TextField(
+          //     controller: _areaController,
+          //     decoration: const InputDecoration(
+          //       hintText: "Enter Area..",
+          //     ),
+          //   ),
+          // ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,
