@@ -36,8 +36,21 @@ class Donorstate extends State {
     setState(() {});
   }
 
+  String blood = '';
+  // ignore: non_constant_identifier_names
   String Area = '';
+  // ignore: non_constant_identifier_names
   String City = '';
+  List<String> bloodgroup = [
+    'A+',
+    'B+',
+    'AB+',
+    'O+',
+    'A-',
+    'B-',
+    'AB-',
+    'O-',
+  ];
   List<String> area = [
     'Gulbark',
     'Green Town',
@@ -49,6 +62,7 @@ class Donorstate extends State {
     'Karachi',
     'Islamabad',
   ];
+  String dropdownbloodValue = 'B+';
   String dropdownareaValue = 'Qartba Chownk';
   String dropdowncityValue = 'Lahore';
   @override
@@ -57,7 +71,7 @@ class Donorstate extends State {
     // TODO: implement build
     TextEditingController name = TextEditingController();
     TextEditingController number = TextEditingController();
-    TextEditingController bloodgroup = TextEditingController();
+    //TextEditingController bloodgroup = TextEditingController();
     //TextEditingController city = TextEditingController();
     // TextEditingController area = TextEditingController();
     String mydonor = myString;
@@ -144,27 +158,20 @@ class Donorstate extends State {
               ),
               // Enter Blood Group
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextFormField(
-                  controller: bloodgroup,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.red),
-                      borderRadius: BorderRadius.circular(50.0),
-                    ),
-                    hintStyle: const TextStyle(color: Colors.red),
-                    hintText: 'Blood Group',
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty ||
-                        !RegExp(r'^[A-O][+-]+$').hasMatch(value)) {
-                      return "Enter Blood Group";
-                    }
-                    return null;
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  value: dropdownbloodValue,
+                  items:
+                      bloodgroup.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                        value: value, child: Text(value));
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownbloodValue = newValue ?? '';
+                      blood = dropdownbloodValue;
+                    });
                   },
                 ),
               ),
@@ -191,75 +198,24 @@ class Donorstate extends State {
               const SizedBox(
                 height: 10,
               ),
-              DropdownButton<String>(
-                isExpanded: true,
-                value: dropdowncityValue,
-                items: city.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                      value: value, child: Text(value));
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    dropdowncityValue = newValue ?? '';
-                    City = dropdowncityValue;
-                  });
-                },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  value: dropdowncityValue,
+                  items: city.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                        value: value, child: Text(value));
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdowncityValue = newValue ?? '';
+                      City = dropdowncityValue;
+                    });
+                  },
+                ),
               ),
-              //Enter city
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 20),
-              //   child: TextFormField(
-              //     controller: city,
-              //     keyboardType: TextInputType.name,
-              //     decoration: InputDecoration(
-              //       border: OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(50.0),
-              //       ),
-              //       focusedBorder: OutlineInputBorder(
-              //         borderSide: const BorderSide(color: Colors.red),
-              //         borderRadius: BorderRadius.circular(50.0),
-              //       ),
-              //       hintStyle: const TextStyle(color: Colors.red),
-              //       hintText: 'city',
-              //     ),
-              //     validator: (value) {
-              //       if (value!.isEmpty ||
-              //           !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-              //         return "Enter City";
-              //       }
-              //       return null;
-              //     },
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 10,
-              // ),
-              // //area
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 20),
-              //   child: TextFormField(
-              //     controller: area,
-              //     keyboardType: TextInputType.name,
-              //     decoration: InputDecoration(
-              //       border: OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(50.0),
-              //       ),
-              //       focusedBorder: OutlineInputBorder(
-              //         borderSide: const BorderSide(color: Colors.red),
-              //         borderRadius: BorderRadius.circular(50.0),
-              //       ),
-              //       hintStyle: const TextStyle(color: Colors.red),
-              //       hintText: 'area',
-              //     ),
-              //     validator: (value) {
-              //       if (value!.isEmpty ||
-              //           !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-              //         return "Enter Area";
-              //       }
-              //       return null;
-              //     },
-              //   ),
-              // ),
+
               const SizedBox(
                 height: 20,
               ),
@@ -279,7 +235,7 @@ class Donorstate extends State {
                       // ignore: non_constant_identifier_names
                       final User = UserDonor(
                           Name: name.text,
-                          Bloodgroup: bloodgroup.text,
+                          Bloodgroup: blood.toString(),
                           City: city.toString(),
                           Area: area.toString(),
                           Donoremail: mydonor,

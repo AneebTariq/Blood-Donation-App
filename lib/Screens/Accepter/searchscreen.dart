@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_string_interpolations
+// ignore_for_file: unnecessary_string_interpolations, non_constant_identifier_names
 
 import 'package:assignmen_1/Screens/Accepter/send_request.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,7 +26,7 @@ class _SearchScreenState extends State {
         FirebaseFirestore.instance.collection("Donor");
     Query query = collectionReference;
 
-    String blood = _bloodController.text.trim();
+    //String blood = _bloodController.text.trim();
     //String city = _cityController.text.trim();
     //String area = _areaController.text.trim();
 
@@ -49,6 +49,7 @@ class _SearchScreenState extends State {
     setState(() {});
   }
 
+  String blood = '';
   String Area = '';
   String City = '';
   List<String> area = [
@@ -57,11 +58,22 @@ class _SearchScreenState extends State {
     'Qartba Chownk',
     'College Road',
   ];
+  List<String> bloodgroup = [
+    'A+',
+    'B+',
+    'AB+',
+    'O+',
+    'A-',
+    'B-',
+    'AB-',
+    'O-',
+  ];
   List<String> city = [
     'Lahore',
     'Karachi',
     'Islamabad',
   ];
+  String dropdownbloodValue = 'B+';
   String dropdownareaValue = 'Qartba Chownk';
   String dropdowncityValue = 'Lahore';
   @override
@@ -73,26 +85,31 @@ class _SearchScreenState extends State {
       ),
       body: Column(
         children: <Widget>[
+          const SizedBox(
+            height: 10,
+          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: TextField(
-              controller: _bloodController,
-              decoration: const InputDecoration(
-                hintText: "Blood Group..",
-              ),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: DropdownButton<String>(
+              isExpanded: true,
+              value: dropdownbloodValue,
+              items: bloodgroup.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                    value: value, child: Text(value));
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  dropdownbloodValue = newValue ?? '';
+                  blood = dropdownbloodValue;
+                });
+              },
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 20),
-          //   child: TextField(
-          //     controller: _cityController,
-          //     decoration: const InputDecoration(
-          //       hintText: "Enter City name..",
-          //     ),
-          //   ),
-          // ),
+          const SizedBox(
+            height: 10,
+          ),
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: DropdownButton<String>(
               isExpanded: true,
               value: dropdownareaValue,
@@ -108,8 +125,11 @@ class _SearchScreenState extends State {
               },
             ),
           ),
+          const SizedBox(
+            height: 10,
+          ),
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: DropdownButton<String>(
               isExpanded: true,
               value: dropdowncityValue,
@@ -125,15 +145,9 @@ class _SearchScreenState extends State {
               },
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-          //   child: TextField(
-          //     controller: _areaController,
-          //     decoration: const InputDecoration(
-          //       hintText: "Enter Area..",
-          //     ),
-          //   ),
-          // ),
+          const SizedBox(
+            height: 10,
+          ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,
