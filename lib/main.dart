@@ -42,7 +42,7 @@ class MyAppstate extends State {
     // TODO: implement build
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Donor App',
+      title: 'Blood Donation Application',
       home: Selected(),
     );
   }

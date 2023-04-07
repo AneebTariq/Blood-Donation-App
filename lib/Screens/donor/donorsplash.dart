@@ -2,10 +2,10 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'package:assignmen_1/Screens/donor/donorlogin.dart';
 import 'package:assignmen_1/shared_pref/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'donorauth.dart';
 import 'donorhome.dart';
 
 class DonorSplashScreen extends StatefulWidget {
@@ -66,7 +66,7 @@ class _SplashScreenState extends State<DonorSplashScreen> {
       if (status) {
         Get.offAll(() => const DonorHome());
       } else {
-        Get.offAll(() => const DonorAuth());
+        Get.offAll(() => const DonorLogin());
       }
     });
   }

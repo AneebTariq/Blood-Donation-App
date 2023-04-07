@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Accepternotification extends StatefulWidget {
@@ -15,7 +16,6 @@ class Accepternotification extends StatefulWidget {
 
 class Accepternotificationstate extends State {
   String myString = '';
-// SharedPreferences prefs = await SharedPreferences.getInstance();
 
   @override
   void initState() {
@@ -36,10 +36,12 @@ class Accepternotificationstate extends State {
   @override
   Widget build(BuildContext context) {
     String myaccepter = myString;
+    String getstatus = 'pendding';
     final Query<Map<String, dynamic>> usersCollection = FirebaseFirestore
         .instance
         .collection('AccepterRequest')
-        .where('Accepterid', isEqualTo: myaccepter);
+        .where('Accepterid', isEqualTo: myaccepter)
+        .where('Status', isEqualTo: getstatus);
 
     return Scaffold(
       appBar: AppBar(
@@ -84,8 +86,28 @@ class Accepternotificationstate extends State {
                                     borderRadius: BorderRadius.circular(50),
                                   ),
                                 ),
-                                onPressed: () {},
-                                child: const Text(' A p p r o v e d'),
+                                onPressed: () {
+                                  String completedstatus = 'Completed';
+                                  FirebaseFirestore.instance
+                                      .collection('AccepterRequest')
+                                      .where('Accepterid',
+                                          isEqualTo: myaccepter)
+                                      .get()
+                                      .then((querySnapshot) {
+                                    querySnapshot.docs
+                                        // ignore: avoid_function_literals_in_foreach_calls
+                                        .forEach((documentSnapshot) {
+                                      documentSnapshot.reference
+                                          .update({'Status': completedstatus});
+                                    });
+                                  });
+                                  Get.snackbar(
+                                      'Completed', ' Blood Donation Competed ',
+                                      backgroundColor: Colors.red,
+                                      colorText: Colors.white,
+                                      snackPosition: SnackPosition.BOTTOM);
+                                },
+                                child: const Text(' c o m p l e t e d '),
                               ),
                             ],
                           ),

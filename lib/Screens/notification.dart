@@ -18,7 +18,8 @@ class Donornotificationstate extends State {
   String myString = '';
 
 // SharedPreferences prefs = await SharedPreferences.getInstance();
-
+  bool button1Enabled = true;
+  bool button2Enabled = true;
   @override
   void initState() {
     super.initState();
@@ -38,10 +39,12 @@ class Donornotificationstate extends State {
   @override
   Widget build(BuildContext context) {
     String mydonor = myString;
+    String mystatus = 'send';
     final Query<Map<String, dynamic>> usersCollection = FirebaseFirestore
         .instance
         .collection('AccepterRequest')
-        .where('Donorid', isEqualTo: mydonor);
+        .where('Donorid', isEqualTo: mydonor)
+        .where('Status', isEqualTo: mystatus);
 
     return Scaffold(
       appBar: AppBar(
@@ -86,24 +89,35 @@ class Donornotificationstate extends State {
                                     borderRadius: BorderRadius.circular(50),
                                   ),
                                 ),
-                                onPressed: () {
-                                  FirebaseFirestore.instance
-                                      .collection('AccepterRequest')
-                                      .where('Donorid', isEqualTo: mydonor)
-                                      .get()
-                                      .then((querySnapshot) {
-                                    querySnapshot.docs
-                                        .forEach((documentSnapshot) {
-                                      documentSnapshot.reference
-                                          .update({'Status': true});
-                                    });
-                                  });
-                                  Get.snackbar(
-                                      'Approved', 'You have aproved it',
-                                      backgroundColor: Colors.red,
-                                      colorText: Colors.white,
-                                      snackPosition: SnackPosition.BOTTOM);
-                                },
+                                onPressed: button1Enabled
+                                    ? () {
+                                        setState(() {
+                                          button1Enabled = true;
+                                          button2Enabled = false;
+                                        });
+                                        // Do something when button 1 is clicked
+                                        String penddingstatus = 'pendding';
+                                        FirebaseFirestore.instance
+                                            .collection('AccepterRequest')
+                                            .where('Donorid',
+                                                isEqualTo: mydonor)
+                                            .get()
+                                            .then((querySnapshot) {
+                                          querySnapshot.docs
+                                              // ignore: avoid_function_literals_in_foreach_calls
+                                              .forEach((documentSnapshot) {
+                                            documentSnapshot.reference.update(
+                                                {'Status': penddingstatus});
+                                          });
+                                        });
+                                        Get.snackbar(
+                                            'Approved', 'You have aproved it',
+                                            backgroundColor: Colors.red,
+                                            colorText: Colors.white,
+                                            snackPosition:
+                                                SnackPosition.BOTTOM);
+                                      }
+                                    : null,
                                 child: const Text(' A p p r o v e '),
                               ),
                               ElevatedButton(
@@ -113,15 +127,36 @@ class Donornotificationstate extends State {
                                     borderRadius: BorderRadius.circular(50),
                                   ),
                                 ),
-                                onPressed: () {
-                                  Get.snackbar(
-                                    'Rejected',
-                                    'You have Rejected it',
-                                    backgroundColor: Colors.red,
-                                    colorText: Colors.white,
-                                    snackPosition: SnackPosition.BOTTOM,
-                                  );
-                                },
+                                onPressed: button2Enabled
+                                    ? () {
+                                        setState(() {
+                                          button1Enabled = false;
+                                          button2Enabled = true;
+                                        });
+                                        // Do something when button 2 is clicked
+                                        String rejectstatus = 'rejected';
+                                        FirebaseFirestore.instance
+                                            .collection('AccepterRequest')
+                                            .where('Donorid',
+                                                isEqualTo: mydonor)
+                                            .get()
+                                            .then((querySnapshot) {
+                                          querySnapshot.docs
+                                              // ignore: avoid_function_literals_in_foreach_calls
+                                              .forEach((documentSnapshot) {
+                                            documentSnapshot.reference.update(
+                                                {'Status': rejectstatus});
+                                          });
+                                          Get.snackbar(
+                                            'Rejected',
+                                            'You have Rejected it',
+                                            backgroundColor: Colors.red,
+                                            colorText: Colors.white,
+                                            snackPosition: SnackPosition.BOTTOM,
+                                          );
+                                        });
+                                      }
+                                    : null,
                                 child: const Text(' R e j e c t '),
                               ),
                             ],

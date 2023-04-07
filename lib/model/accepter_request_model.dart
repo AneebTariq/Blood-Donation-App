@@ -8,7 +8,7 @@ class UserRequest {
   final String Address;
   final String Donorid;
   final String Accepterid;
-  final bool Status;
+  final String Status;
 
   const UserRequest({
     this.id,

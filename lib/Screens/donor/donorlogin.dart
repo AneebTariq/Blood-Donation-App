@@ -57,6 +57,7 @@ class DonorLogin extends StatelessWidget {
                     ),
                   ),
                 ),
+                validator: (value) => value!.isEmpty ? 'Enter Email' : null,
               ),
             ),
             const SizedBox(
@@ -94,6 +95,7 @@ class DonorLogin extends StatelessWidget {
                     ),
                   ),
                 ),
+                validator: (value) => value!.isEmpty ? 'Enter Password' : null,
               ),
             ),
             const SizedBox(

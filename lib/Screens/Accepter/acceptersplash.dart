@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:assignmen_1/Screens/Accepter/accepterlogin.dart';
 import 'package:assignmen_1/shared_pref/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'accepterauth.dart';
 import 'accepterhome.dart';
 
 class AccepterSplashScreen extends StatefulWidget {
@@ -65,7 +65,7 @@ class _SplashScreenState extends State<AccepterSplashScreen> {
       if (status) {
         Get.offAll(() => const AccepterHome());
       } else {
-        Get.offAll(() => const AccepterAuth());
+        Get.offAll(() => AccepterLogin());
       }
     });
   }

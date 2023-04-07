@@ -31,15 +31,15 @@ class _SearchScreenState extends State {
     String area = _areaController.text.trim();
 
     if (blood.isNotEmpty) {
-      query = query.where("Blood Group", isEqualTo: blood);
+      query = query.where("Blood Group", isEqualTo: blood.toUpperCase());
     }
 
     if (city.isNotEmpty) {
-      query = query.where("City", isEqualTo: city);
+      query = query.where("City", isEqualTo: city.toUpperCase());
     }
 
     if (area.isNotEmpty) {
-      query = query.where("Area", isEqualTo: area);
+      query = query.where("Area", isEqualTo: area.toUpperCase());
     }
 
     return query.snapshots();
@@ -135,28 +135,34 @@ class _SearchScreenState extends State {
                             ListTile(
                               leading: Text(document['Blood Group']),
                               title: Text(document["Name"]),
-                              subtitle: Text(document["City"]),
-                              trailing: Text(document["Area"]),
+                              subtitle: Text(document["Number"]),
+                              trailing: Text(
+                                  document["Area"] + '  ' + document["City"]),
                             ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(document["Donoremail"]),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.red,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    String mydonorid = document['Donoremail'];
+                                    Get.to(() => const Requesttodonor(),
+                                        arguments: MyPageArguments(
+                                            donorid: '$mydonorid'));
+                                    setState(() {});
+                                  },
+                                  child: const Text(
+                                    ' R e q u e s t ',
+                                    style: TextStyle(fontSize: 18),
+                                  ),
                                 ),
-                              ),
-                              onPressed: () {
-                                String mydonorid = document['Donoremail'];
-                                print(document['Donoremail']);
-                                Get.to(() => const Requesttodonor(),
-                                    arguments:
-                                        MyPageArguments(donorid: '$mydonorid'));
-                                setState(() {});
-                              },
-                              child: const Text(
-                                ' R e q u e s t ',
-                                style: TextStyle(fontSize: 18),
-                              ),
+                              ],
                             )
                           ],
                         ),

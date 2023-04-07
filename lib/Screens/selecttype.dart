@@ -1,4 +1,3 @@
-import 'package:assignmen_1/Screens/adminui/adminlogin.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'Accepter/acceptersplash.dart';
@@ -14,46 +13,9 @@ class Selected extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Donor & Accepter App',
-          style: TextStyle(color: Colors.black),
+          'Blood Donation Application',
+          style: TextStyle(color: Colors.white),
         ),
-        actions: [
-          IconButton(
-            color: Colors.black,
-            onPressed: () {
-              Get.dialog(Center(
-                child: Column(
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        Get.to(() => const AdminLogin());
-                      },
-                      child: const Text('Login as Admin'),
-                    ),
-                    const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-                      child: Text(
-                        'About US',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                    ),
-                    const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      child: Text(
-                        'Our donor app is an innovative platform designed to facilitate a seamless and efficient donation process that benefits both donors and recipients. '
-                        ' By leveraging advanced technology and prioritizing user experience, we have created a digital space where people can make a meaningful impact with the simple touch of a button. ',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ),
-                  ],
-                ),
-              ));
-            },
-            icon: const Icon(Icons.more_horiz),
-          ),
-        ],
         backgroundColor: Colors.red,
         elevation: 0,
       ),

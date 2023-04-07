@@ -1,9 +1,9 @@
 // ignore_for_file: file_names
 import 'package:assignmen_1/Screens/Accepter/accepter_notification.dart';
 import 'package:assignmen_1/Screens/Accepter/searchscreen.dart';
+import 'package:assignmen_1/Screens/donor/donorsplash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../selecttype.dart';
 
 class AccepterHome extends StatelessWidget {
   const AccepterHome({super.key});
@@ -24,25 +24,17 @@ class AccepterHome extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text(
-                'H o m e ',
+                ' D o n o r ',
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-                Get.offAll(() => const Selected());
+                Get.offAll(() => const DonorSplashScreen());
               },
-            ),
-            ListTile(
-              leading: const Icon(Icons.person),
-              title: const Text(
-                'P r o f i l e ',
-                style: TextStyle(fontSize: 18),
-              ),
-              onTap: () {},
             ),
             ListTile(
               leading: const Icon(Icons.notifications_active),
               title: const Text(
-                'N o t i f i c a t i o n ',
+                ' R e q u e s t s ',
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {

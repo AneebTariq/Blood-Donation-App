@@ -21,7 +21,7 @@ class Donor extends StatefulWidget {
 class Donorstate extends State {
   String myString = '';
 // SharedPreferences prefs = await SharedPreferences.getInstance();
-
+  final formKey = GlobalKey<FormState>(); //key for form
   @override
   void initState() {
     super.initState();
@@ -48,13 +48,17 @@ class Donorstate extends State {
     TextEditingController city = TextEditingController();
     TextEditingController area = TextEditingController();
     String mydonor = myString;
+    // ignore: no_leading_underscores_for_local_identifiers
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: const Text('Donor'),
         backgroundColor: Colors.red,
       ),
       body: SafeArea(
         child: Form(
+          key: formKey,
           child: ListView(
             children: <Widget>[
               const SizedBox(
@@ -65,7 +69,7 @@ class Donorstate extends State {
                 height: 200,
               ),
               const SizedBox(
-                height: 20,
+                height: 5,
               ),
               // Enter name
               Padding(
@@ -84,10 +88,17 @@ class Donorstate extends State {
                     hintStyle: const TextStyle(color: Colors.red),
                     hintText: 'name',
                   ),
+                  validator: (value) {
+                    if (value!.isEmpty ||
+                        !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                      return "Enter Correct Name";
+                    }
+                    return null;
+                  },
                 ),
               ),
               const SizedBox(
-                height: 5,
+                height: 10,
               ),
               // Enter number
               Padding(
@@ -106,10 +117,17 @@ class Donorstate extends State {
                     hintStyle: const TextStyle(color: Colors.red),
                     hintText: 'number',
                   ),
+                  validator: (value) {
+                    if (value!.isEmpty ||
+                        !RegExp(r'^[+]*[0-9]+$').hasMatch(value)) {
+                      return "Enter Correct Phone Number";
+                    }
+                    return null;
+                  },
                 ),
               ),
               const SizedBox(
-                height: 5,
+                height: 10,
               ),
               // Enter Blood Group
               Padding(
@@ -128,10 +146,17 @@ class Donorstate extends State {
                     hintStyle: const TextStyle(color: Colors.red),
                     hintText: 'Blood Group',
                   ),
+                  validator: (value) {
+                    if (value!.isEmpty ||
+                        !RegExp(r'^[A-O][+-]+$').hasMatch(value)) {
+                      return "Enter Correct Name";
+                    }
+                    return null;
+                  },
                 ),
               ),
               const SizedBox(
-                height: 5,
+                height: 10,
               ),
               //Enter city
               Padding(
@@ -150,10 +175,17 @@ class Donorstate extends State {
                     hintStyle: const TextStyle(color: Colors.red),
                     hintText: 'city',
                   ),
+                  validator: (value) {
+                    if (value!.isEmpty ||
+                        !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                      return "Enter Correct Name";
+                    }
+                    return null;
+                  },
                 ),
               ),
               const SizedBox(
-                height: 5,
+                height: 10,
               ),
               //area
               Padding(
@@ -172,6 +204,13 @@ class Donorstate extends State {
                     hintStyle: const TextStyle(color: Colors.red),
                     hintText: 'area',
                   ),
+                  validator: (value) {
+                    if (value!.isEmpty ||
+                        !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                      return "Enter Correct Name";
+                    }
+                    return null;
+                  },
                 ),
               ),
               const SizedBox(
@@ -189,17 +228,19 @@ class Donorstate extends State {
                     ),
                   ),
                   onPressed: () async {
-                    // ignore: non_constant_identifier_names
-                    final User = UserDonor(
-                        Name: name.text,
-                        Bloodgroup: bloodgroup.text,
-                        City: city.text,
-                        Area: area.text,
-                        Donoremail: mydonor,
-                        Number: number.text);
-                    await Donorrepository().CreateDonor(User);
-                    //await SharedPrefClient().getUser();
-                    Get.offAll(() => const DonorHome());
+                    if (formKey.currentState!.validate()) {
+                      // ignore: non_constant_identifier_names
+                      final User = UserDonor(
+                          Name: name.text.toUpperCase(),
+                          Bloodgroup: bloodgroup.text.toUpperCase(),
+                          City: city.text.toUpperCase(),
+                          Area: area.text.toUpperCase(),
+                          Donoremail: mydonor,
+                          Number: number.text);
+                      await Donorrepository().CreateDonor(User);
+                      //await SharedPrefClient().getUser();
+                      Get.offAll(() => const DonorHome());
+                    }
                   },
                   child: const Text(
                     'Submit',
