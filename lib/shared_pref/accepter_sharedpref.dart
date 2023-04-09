@@ -1,38 +1,10 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import '../model/donor_user_model.dart';
 import '../model/user_model.dart';
 
-class SharedPrefClient {
-  static const donoruserId = 'donoruserId';
-  static const donoremail = 'donoremail';
-
-  Future<bool> isUserLoggedIn() async {
-    final sharedPref = await SharedPreferences.getInstance();
-    final userToken = sharedPref.getString(donoruserId);
-    return userToken != null;
-  }
-
-  Future<DonorUserModel> getUser() async {
-    final sharedPref = await SharedPreferences.getInstance();
-    final id = sharedPref.getString(donoruserId);
-    final mail = sharedPref.getString(donoremail);
-    return DonorUserModel(id!, mail!);
-  }
-
-  Future<void> setUser(DonorUserModel user) async {
-    final sharedPref = await SharedPreferences.getInstance();
-    await sharedPref.setString(donoruserId, user.donoruserId);
-    await sharedPref.setString(donoremail, user.donoremail);
-  }
-
-  Future<void> clearUser() async {
-    final sharedPref = await SharedPreferences.getInstance();
-    await sharedPref.remove(donoruserId);
-  }
-
-  //accepter shared prefrances
+class SharedPrefaccClient {
   static const accepteruserId = 'accepteruserId';
   static const accepteremail = 'accepteremail';
+  static const String role = 'accepterrole';
 
   Future<bool> isUserLoggedInaccepter() async {
     final sharedPref = await SharedPreferences.getInstance();
@@ -42,6 +14,8 @@ class SharedPrefClient {
 
   Future<AccepterUserModel> getUseraccepter() async {
     final sharedPref = await SharedPreferences.getInstance();
+    // ignore: unused_local_variable
+    final accrole = sharedPref.getString(role);
     final id = sharedPref.getString(accepteruserId);
     final mail = sharedPref.getString(accepteremail);
     return AccepterUserModel(id!, mail!);

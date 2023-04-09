@@ -1,21 +1,39 @@
 // ignore_for_file: avoid_print, avoid_types_as_parameter_names
-
 import 'package:assignmen_1/model/user_model.dart';
-import 'package:assignmen_1/shared_pref/shared_pref.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../shared_pref/accepter_sharedpref.dart';
 import 'accepterhome.dart';
 import 'accpterregister.dart';
 
-class AccepterLogin extends StatelessWidget {
-  AccepterLogin({super.key});
-  final formKey = GlobalKey<FormState>(); //key for form
+class AccepterLogin extends StatefulWidget {
+  const AccepterLogin({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return Accepterloginstate();
+  }
+}
+
+class Accepterloginstate extends State {
+  // ignore: prefer_typing_uninitialized_variables
+  var passwordobs;
+
+  @override
+  void initState() {
+    super.initState();
+    passwordobs = true;
+  }
+
+  final formKey = GlobalKey<FormState>();
+  //key for form
   @override
   Widget build(BuildContext context) {
     // ignore: todo
     // TODO: implement
     String accepteremail = '', accepterpassword = '';
+    // ignore: no_leading_underscores_for_local_identifiers
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: _scaffoldKey,
@@ -74,7 +92,7 @@ class AccepterLogin extends StatelessWidget {
                     accepterpassword = value;
                   },
                   keyboardType: TextInputType.name,
-                  obscureText: true,
+                  obscureText: passwordobs,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50.0),
@@ -84,11 +102,17 @@ class AccepterLogin extends StatelessWidget {
                       borderRadius: BorderRadius.circular(50.0),
                     ),
                     hintText: 'Password',
-                    suffixIcon: const Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: Icon(
-                        Icons.visibility,
-                        color: Colors.red,
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            passwordobs = !passwordobs;
+                          });
+                        },
+                        icon: passwordobs
+                            ? const Icon(Icons.visibility)
+                            : const Icon(Icons.visibility_off),
                       ),
                     ),
                     prefixIcon: const Padding(
@@ -122,15 +146,25 @@ class AccepterLogin extends StatelessWidget {
                         email: accepteremail,
                         password: accepterpassword,
                       );
-                      await SharedPrefClient().setUseraccepter(
+                      await SharedPrefaccClient().setUseraccepter(
                           AccepterUserModel(
                               credential.user!.uid, credential.user!.email!));
                       Get.offAll(() => const AccepterHome());
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'user-not-found') {
+                        Get.snackbar(
+                            'Wrong', ' Please Enter Correct Email/Password ',
+                            backgroundColor: Colors.red,
+                            colorText: Colors.white,
+                            snackPosition: SnackPosition.BOTTOM);
                         print('No user found for that email.');
                       } else if (e.code == 'wrong-password') {
                         print('Wrong password provided for that user.');
+                        Get.snackbar(
+                            'Wrong Password', ' Enter Correct Password ',
+                            backgroundColor: Colors.red,
+                            colorText: Colors.white,
+                            snackPosition: SnackPosition.BOTTOM);
                       }
                     }
                   },

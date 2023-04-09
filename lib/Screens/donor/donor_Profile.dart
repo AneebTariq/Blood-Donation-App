@@ -1,10 +1,10 @@
 import 'package:assignmen_1/Screens/donor/donor_history.dart';
+import 'package:assignmen_1/Screens/selecttype.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../Accepter/acceptersplash.dart';
 import '../notification.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -55,11 +55,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text(
-                ' A c c e p t e r ',
+                ' H o m e ',
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-                Get.offAll(() => const AccepterSplashScreen());
+                Get.offAll(() => const Selected());
               },
             ),
             ListTile(
@@ -80,6 +80,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               onTap: () {
                 Get.to(() => const Donornotification());
+              },
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text(
+                ' L o g o u t ',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                Get.to(() => const Selected());
               },
             ),
           ],

@@ -71,9 +71,7 @@ class Donorstate extends State {
     // TODO: implement build
     TextEditingController name = TextEditingController();
     TextEditingController number = TextEditingController();
-    //TextEditingController bloodgroup = TextEditingController();
-    //TextEditingController city = TextEditingController();
-    // TextEditingController area = TextEditingController();
+
     String mydonor = myString;
     // ignore: no_leading_underscores_for_local_identifiers
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -124,6 +122,7 @@ class Donorstate extends State {
                   },
                 ),
               ),
+
               const SizedBox(
                 height: 10,
               ),
@@ -160,6 +159,7 @@ class Donorstate extends State {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: DropdownButton<String>(
+                  hint: const Text('Chose Blood Group'),
                   isExpanded: true,
                   value: dropdownbloodValue,
                   items:
@@ -181,6 +181,7 @@ class Donorstate extends State {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: DropdownButton<String>(
+                  hint: const Text('Chose Area'),
                   isExpanded: true,
                   value: dropdownareaValue,
                   items: area.map<DropdownMenuItem<String>>((String value) {
@@ -201,6 +202,7 @@ class Donorstate extends State {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: DropdownButton<String>(
+                  hint: const Text('Chose City'),
                   isExpanded: true,
                   value: dropdowncityValue,
                   items: city.map<DropdownMenuItem<String>>((String value) {
@@ -236,8 +238,8 @@ class Donorstate extends State {
                       final User = UserDonor(
                           Name: name.text,
                           Bloodgroup: blood.toString(),
-                          City: city.toString(),
-                          Area: area.toString(),
+                          City: City.toString(),
+                          Area: Area.toString(),
                           Donoremail: mydonor,
                           Number: number.text);
                       await Donorrepository().CreateDonor(User);

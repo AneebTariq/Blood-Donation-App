@@ -17,18 +17,10 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State {
-  final TextEditingController _areaController = TextEditingController();
-  final TextEditingController _bloodController = TextEditingController();
-  final TextEditingController _cityController = TextEditingController();
-
   Stream<QuerySnapshot> _getStream() {
     CollectionReference collectionReference =
         FirebaseFirestore.instance.collection("Donor");
     Query query = collectionReference;
-
-    //String blood = _bloodController.text.trim();
-    //String city = _cityController.text.trim();
-    //String area = _areaController.text.trim();
 
     if (blood.isNotEmpty) {
       query = query.where("Blood Group", isEqualTo: blood);

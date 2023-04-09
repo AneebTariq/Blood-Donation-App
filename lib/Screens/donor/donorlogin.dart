@@ -7,13 +7,27 @@ import '../../model/donor_user_model.dart';
 import '../../shared_pref/shared_pref.dart';
 import 'donorregister.dart';
 
-class DonorLogin extends StatelessWidget {
+class DonorLogin extends StatefulWidget {
   const DonorLogin({super.key});
 
   @override
+  State<StatefulWidget> createState() {
+    return DonorLoginstate();
+  }
+}
+
+class DonorLoginstate extends State {
+  // ignore: prefer_typing_uninitialized_variables
+  var passwordobs;
+
+  @override
+  void initState() {
+    super.initState();
+    passwordobs = true;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // ignore: todo
-    // TODO: implement
     String donoremail = '', donorpassword = '';
 
     return Scaffold(
@@ -70,7 +84,7 @@ class DonorLogin extends StatelessWidget {
                   donorpassword = value;
                 },
                 keyboardType: TextInputType.name,
-                obscureText: true,
+                obscureText: passwordobs,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50.0),
@@ -80,11 +94,17 @@ class DonorLogin extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50.0),
                   ),
                   hintText: 'Password',
-                  suffixIcon: const Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: Icon(
-                      Icons.visibility,
-                      color: Colors.red,
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          passwordobs = !passwordobs;
+                        });
+                      },
+                      icon: passwordobs
+                          ? const Icon(Icons.visibility)
+                          : const Icon(Icons.visibility_off),
                     ),
                   ),
                   prefixIcon: const Padding(
@@ -123,8 +143,17 @@ class DonorLogin extends StatelessWidget {
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
                       print('No user found for that email.');
+                      Get.snackbar('Wrong',
+                          ' Please Enter Correct Email.This User is Not Found ',
+                          backgroundColor: Colors.red,
+                          colorText: Colors.white,
+                          snackPosition: SnackPosition.BOTTOM);
                     } else if (e.code == 'wrong-password') {
                       print('Wrong password provided for that user.');
+                      Get.snackbar('Weak', ' Please Enter Correct Password ',
+                          backgroundColor: Colors.red,
+                          colorText: Colors.white,
+                          snackPosition: SnackPosition.BOTTOM);
                     }
                   }
                 },
@@ -142,7 +171,7 @@ class DonorLogin extends StatelessWidget {
                 const Text('Do not have account?'),
                 TextButton(
                   onPressed: () {
-                    Get.to(const DonorRegister());
+                    Get.to(() => const DonorRegister());
                   },
                   child: const Text(
                     'Register',

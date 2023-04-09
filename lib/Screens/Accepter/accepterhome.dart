@@ -2,13 +2,11 @@
 import 'package:assignmen_1/Screens/Accepter/accepter_history.dart';
 import 'package:assignmen_1/Screens/Accepter/accepter_notification.dart';
 import 'package:assignmen_1/Screens/Accepter/searchscreen.dart';
-import 'package:assignmen_1/Screens/donor/donorsplash.dart';
-import 'package:assignmen_1/shared_pref/shared_pref.dart';
+import 'package:assignmen_1/Screens/selecttype.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../model/user_model.dart';
 
 class AccepterHome extends StatefulWidget {
   const AccepterHome({super.key});
@@ -25,6 +23,7 @@ class Accepterhomestate extends State {
   @override
   void initState() {
     super.initState();
+    getData();
   }
 
   Future<SharedPreferences> getSharedPreferencesInstance() async {
@@ -33,29 +32,32 @@ class Accepterhomestate extends State {
 
   Future<void> getData() async {
     SharedPreferences prefs = await getSharedPreferencesInstance();
-    myString = prefs.getString('donoremail') ?? '';
+    myString = prefs.getString('accepteremail') ?? '';
     setState(() {});
   }
 
+  final user = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
+    String? myaccepter = user?.email;
     return Scaffold(
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-            const UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Colors.red),
-              accountName: Text(''),
-              accountEmail: Text(' '),
+            UserAccountsDrawerHeader(
+              decoration: const BoxDecoration(color: Colors.red),
+              accountName: const Text(''),
+              accountEmail: Text(myaccepter!),
             ),
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text(
-                ' D o n o r ',
+                ' H o m e ',
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-                Get.offAll(() => const DonorSplashScreen());
+                Get.offAll(() => const Selected());
               },
             ),
             ListTile(
@@ -76,6 +78,17 @@ class Accepterhomestate extends State {
               ),
               onTap: () {
                 Get.to(() => const Accepterhistory());
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text(
+                ' L o g o u t ',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                Get.to(() => const Selected());
               },
             ),
           ],

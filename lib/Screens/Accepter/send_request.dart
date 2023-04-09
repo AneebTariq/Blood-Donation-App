@@ -2,6 +2,7 @@
 
 import 'package:assignmen_1/Screens/Accepter/searchscreen.dart';
 import 'package:assignmen_1/model/accepter_request_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,6 +21,7 @@ class Requesttodonor extends StatefulWidget {
 class Requesttodonorstate extends State {
   TextEditingController AccepName = TextEditingController();
   TextEditingController Address = TextEditingController();
+  TextEditingController AccepterEmail = TextEditingController();
 
   final args = Get.arguments as MyPageArguments;
   String myString = '';
@@ -41,10 +43,12 @@ class Requesttodonorstate extends State {
     setState(() {});
   }
 
+  final user = FirebaseAuth.instance.currentUser;
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    String myaccepemail = myString;
+    String? myaccepemail = user!.email;
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -58,6 +62,40 @@ class Requesttodonorstate extends State {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               //Text('Email: ${args.donorid}'),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextFormField(
+                  controller: AccepterEmail,
+                  keyboardType: TextInputType.emailAddress,
+                  focusNode: FocusNode(),
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.red),
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                    hintText: 'From:  Enter Your Email',
+                    prefixIcon: const Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty ||
+                        !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                            .hasMatch(value)) {
+                      return "Enter Email";
+                    }
+                    return null;
+                  },
+                ),
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -149,7 +187,7 @@ class Requesttodonorstate extends State {
                           AccepName: AccepName.text,
                           Address: Address.text,
                           Donorid: args.donorid,
-                          Accepterid: myaccepemail,
+                          Accepterid: myaccepemail.toString(),
                           Status: "send",
                         );
                         await Requestrepository().CreateDonor(acceptrequest);

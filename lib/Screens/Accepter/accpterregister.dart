@@ -1,15 +1,30 @@
 // ignore_for_file: non_constant_identifier_names, avoid_types_as_parameter_names, duplicate_ignore, avoid_print, unused_local_variable
-
-import 'package:assignmen_1/shared_pref/shared_pref.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../model/user_model.dart';
+import '../../shared_pref/accepter_sharedpref.dart';
 import 'accepterhome.dart';
 import 'accepterlogin.dart';
 
-class AccepterRegister extends StatelessWidget {
+class AccepterRegister extends StatefulWidget {
   const AccepterRegister({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return Accepterregisterstate();
+  }
+}
+
+class Accepterregisterstate extends State {
+  // ignore: prefer_typing_uninitialized_variables
+  var passwordobs;
+
+  @override
+  void initState() {
+    super.initState();
+    passwordobs = true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +87,7 @@ class AccepterRegister extends StatelessWidget {
                   accepterpassword = value;
                 },
                 keyboardType: TextInputType.name,
-                obscureText: true,
+                obscureText: passwordobs,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50.0),
@@ -82,11 +97,17 @@ class AccepterRegister extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50.0),
                   ),
                   hintText: 'Password',
-                  suffixIcon: const Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: Icon(
-                      Icons.visibility,
-                      color: Colors.red,
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          passwordobs = !passwordobs;
+                        });
+                      },
+                      icon: passwordobs
+                          ? const Icon(Icons.visibility)
+                          : const Icon(Icons.visibility_off),
                     ),
                   ),
                   prefixIcon: const Padding(
@@ -117,20 +138,32 @@ class AccepterRegister extends StatelessWidget {
                       email: accepteremail,
                       password: accepterpassword,
                     );
-                    await SharedPrefClient().setUseraccepter(AccepterUserModel(
-                        credential.user!.uid, credential.user!.email!));
+                    await SharedPrefaccClient().setUseraccepter(
+                        AccepterUserModel(
+                            credential.user!.uid, credential.user!.email!));
                     Get.offAll(() => const AccepterHome());
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
                       print('The password provided is too weak.');
+                      Get.snackbar('Weak Password', ' Enter Strong Password ',
+                          backgroundColor: Colors.red,
+                          colorText: Colors.white,
+                          snackPosition: SnackPosition.BOTTOM);
                     } else if (e.code == 'email-already-in-use') {
                       print('The account already exists for that email.');
+                      Get.snackbar('Wrong Email', ' Enter another Email ',
+                          backgroundColor: Colors.red,
+                          colorText: Colors.white,
+                          snackPosition: SnackPosition.BOTTOM);
                     }
                   } catch (e) {
                     print(e);
                   }
                 },
-                child: const Text('Register')),
+                child: const Text(
+                  ' R e g i s t e r ',
+                  style: TextStyle(fontSize: 25),
+                )),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -138,7 +171,7 @@ class AccepterRegister extends StatelessWidget {
                 const Text('Allready have account?'),
                 TextButton(
                   onPressed: () {
-                    Get.to(() => AccepterLogin());
+                    Get.to(() => const AccepterLogin());
                   },
                   child: const Text(
                     'Login',

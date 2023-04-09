@@ -65,7 +65,7 @@ class _SplashScreenState extends State<AccepterSplashScreen> {
       if (status) {
         Get.offAll(() => const AccepterHome());
       } else {
-        Get.offAll(() => AccepterLogin());
+        Get.offAll(() => const AccepterLogin());
       }
     });
   }
