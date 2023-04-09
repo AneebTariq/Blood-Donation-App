@@ -85,9 +85,26 @@ class DonorRegisterstate extends State {
                 // Enter Blood Group
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: DropdownButton<String>(
+                  child: DropdownButtonFormField<String>(
                     hint: const Text('Chose Blood Group'),
                     isExpanded: true,
+                    icon: const Icon(Icons.arrow_drop_down_circle,
+                        color: Colors.red),
+                    decoration: InputDecoration(
+                      labelText: 'Blood Group',
+                      prefixIcon: const Icon(
+                        Icons.bloodtype,
+                        color: Colors.red,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: const BorderSide(color: Colors.red),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: const BorderSide(color: Colors.red),
+                      ),
+                    ),
                     value: dropdownbloodValue,
                     items: bloodgroup
                         .map<DropdownMenuItem<String>>((String value) {
@@ -108,9 +125,26 @@ class DonorRegisterstate extends State {
                 //chose Area
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: DropdownButton<String>(
+                  child: DropdownButtonFormField<String>(
                     hint: const Text('Chose Area'),
                     isExpanded: true,
+                    icon: const Icon(Icons.arrow_drop_down_circle,
+                        color: Colors.red),
+                    decoration: InputDecoration(
+                      labelText: 'Area',
+                      prefixIcon: const Icon(
+                        Icons.area_chart_outlined,
+                        color: Colors.red,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: const BorderSide(color: Colors.red),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: const BorderSide(color: Colors.red),
+                      ),
+                    ),
                     value: dropdownareaValue,
                     items: area.map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
@@ -130,9 +164,26 @@ class DonorRegisterstate extends State {
                 //chose city
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: DropdownButton<String>(
+                  child: DropdownButtonFormField<String>(
                     hint: const Text('Chose City'),
                     isExpanded: true,
+                    icon: const Icon(Icons.arrow_drop_down_circle,
+                        color: Colors.red),
+                    decoration: InputDecoration(
+                      labelText: 'City',
+                      prefixIcon: const Icon(
+                        Icons.location_city,
+                        color: Colors.red,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: const BorderSide(color: Colors.red),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: const BorderSide(color: Colors.red),
+                      ),
+                    ),
                     value: dropdowncityValue,
                     items: city.map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(

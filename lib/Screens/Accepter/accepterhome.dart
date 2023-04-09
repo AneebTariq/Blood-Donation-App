@@ -36,19 +36,19 @@ class Accepterhomestate extends State {
     setState(() {});
   }
 
-  final user = FirebaseAuth.instance.currentUser;
+  // final user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
-    String? myaccepter = user?.email;
+    String myaccepter = myString;
     return Scaffold(
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              decoration: const BoxDecoration(color: Colors.red),
-              accountName: const Text(''),
-              accountEmail: Text(myaccepter!),
+              decoration: BoxDecoration(color: Colors.red),
+              accountName: Text(''),
+              accountEmail: Text(myaccepter),
             ),
             ListTile(
               leading: const Icon(Icons.home),

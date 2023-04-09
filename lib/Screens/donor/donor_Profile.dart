@@ -1,3 +1,4 @@
+import 'package:assignmen_1/Screens/Accepter/accepter_history.dart';
 import 'package:assignmen_1/Screens/donor/donor_history.dart';
 import 'package:assignmen_1/Screens/selecttype.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -84,6 +85,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const SizedBox(
               height: 5,
+            ),
+            ListTile(
+              leading: const Icon(Icons.message_outlined),
+              title: const Text(
+                ' H i s t o r y ',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                Get.to(() => const Accepterhistory());
+              },
             ),
             ListTile(
               leading: const Icon(Icons.logout),

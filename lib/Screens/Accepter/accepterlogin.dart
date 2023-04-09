@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print, avoid_types_as_parameter_names
 import 'package:assignmen_1/model/user_model.dart';
+import 'package:assignmen_1/repository/login_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,13 +34,14 @@ class Accepterloginstate extends State {
     // ignore: todo
     // TODO: implement
     String accepteremail = '', accepterpassword = '';
+    HomeControlleracc homecontroller = Get.put(HomeControlleracc());
     // ignore: no_leading_underscores_for_local_identifiers
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: _scaffoldKey,
       body: SingleChildScrollView(
         child: Form(
-          key: formKey,
+          key: homecontroller.accloginFormKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -56,9 +58,10 @@ class Accepterloginstate extends State {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: TextFormField(
-                  onChanged: (value) {
-                    accepteremail = value;
-                  },
+                  controller: homecontroller.emailController,
+                  // onChanged: (value) {
+                  //   accepteremail = value;
+                  // },
                   keyboardType: TextInputType.emailAddress,
                   focusNode: FocusNode(),
                   autofocus: true,
@@ -88,9 +91,10 @@ class Accepterloginstate extends State {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: TextFormField(
-                  onChanged: (value) {
-                    accepterpassword = value;
-                  },
+                  controller: homecontroller.passwordController,
+                  // onChanged: (value) {
+                  //   accepterpassword = value;
+                  // },
                   keyboardType: TextInputType.name,
                   obscureText: passwordobs,
                   decoration: InputDecoration(
@@ -102,6 +106,13 @@ class Accepterloginstate extends State {
                       borderRadius: BorderRadius.circular(50.0),
                     ),
                     hintText: 'Password',
+                    prefixIcon: const Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: Icon(
+                        Icons.lock,
+                        color: Colors.red,
+                      ),
+                    ),
                     suffixIcon: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: IconButton(
@@ -113,13 +124,6 @@ class Accepterloginstate extends State {
                         icon: passwordobs
                             ? const Icon(Icons.visibility)
                             : const Icon(Icons.visibility_off),
-                      ),
-                    ),
-                    prefixIcon: const Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: Icon(
-                        Icons.lock,
-                        color: Colors.red,
                       ),
                     ),
                   ),
@@ -139,12 +143,13 @@ class Accepterloginstate extends State {
                     ),
                   ),
                   onPressed: () async {
+                    homecontroller.checkLogin();
                     try {
                       // ignore: unused_local_variable
                       final credential = await FirebaseAuth.instance
                           .signInWithEmailAndPassword(
-                        email: accepteremail,
-                        password: accepterpassword,
+                        email: homecontroller.emailController.text,
+                        password: homecontroller.passwordController.text,
                       );
                       await SharedPrefaccClient().setUseraccepter(
                           AccepterUserModel(

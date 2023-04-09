@@ -80,10 +80,27 @@ class _SearchScreenState extends State {
           const SizedBox(
             height: 10,
           ),
+          //blood Group
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: DropdownButton<String>(
+            child: DropdownButtonFormField<String>(
               isExpanded: true,
+              icon: const Icon(Icons.arrow_drop_down_circle, color: Colors.red),
+              decoration: InputDecoration(
+                labelText: 'Blood Group',
+                prefixIcon: const Icon(
+                  Icons.bloodtype,
+                  color: Colors.red,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: const BorderSide(color: Colors.red),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: const BorderSide(color: Colors.red),
+                ),
+              ),
               value: dropdownbloodValue,
               items: bloodgroup.map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
@@ -100,10 +117,27 @@ class _SearchScreenState extends State {
           const SizedBox(
             height: 10,
           ),
+          //Area
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: DropdownButton<String>(
+            child: DropdownButtonFormField<String>(
               isExpanded: true,
+              icon: const Icon(Icons.arrow_drop_down_circle, color: Colors.red),
+              decoration: InputDecoration(
+                labelText: 'Area',
+                prefixIcon: const Icon(
+                  Icons.area_chart,
+                  color: Colors.red,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: const BorderSide(color: Colors.red),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: const BorderSide(color: Colors.red),
+                ),
+              ),
               value: dropdownareaValue,
               items: area.map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
@@ -120,10 +154,27 @@ class _SearchScreenState extends State {
           const SizedBox(
             height: 10,
           ),
+          // City
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: DropdownButton<String>(
+            child: DropdownButtonFormField<String>(
               isExpanded: true,
+              icon: const Icon(Icons.arrow_drop_down_circle, color: Colors.red),
+              decoration: InputDecoration(
+                labelText: 'City',
+                prefixIcon: const Icon(
+                  Icons.location_city_outlined,
+                  color: Colors.red,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: const BorderSide(color: Colors.red),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: const BorderSide(color: Colors.red),
+                ),
+              ),
               value: dropdowncityValue,
               items: city.map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(

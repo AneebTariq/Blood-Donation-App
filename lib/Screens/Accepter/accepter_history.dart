@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,37 +15,19 @@ class Accepterhistory extends StatefulWidget {
 }
 
 class Accepternotificationstate extends State {
-  String myString = '';
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
-  }
-
-  Future<SharedPreferences> getSharedPreferencesInstance() async {
-    return await SharedPreferences.getInstance();
-  }
-
-  Future<void> getData() async {
-    SharedPreferences prefs = await getSharedPreferencesInstance();
-    myString = prefs.getString('accepteremail') ?? '';
-    setState(() {});
-  }
-
+  final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
-    String myaccepter = myString;
+    String? myaccepter = user?.email;
     String getstatus = 'Completed';
     final Query<Map<String, dynamic>> usersCollection = FirebaseFirestore
         .instance
         .collection('AccepterRequest')
-        .where('Accepterid', isEqualTo: myaccepter)
-        .where('Status', isEqualTo: getstatus);
+        .where('Accepterid', isEqualTo: myaccepter);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Notifications'),
+        title: const Text('History'),
         backgroundColor: Colors.red,
       ),
       body: StreamBuilder<QuerySnapshot>(
