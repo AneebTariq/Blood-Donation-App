@@ -12,6 +12,9 @@ class UserDonor {
   final String Area;
   final String Number;
   final String Donoremail;
+  final String? address;
+  final double? latitude;
+  final double? longitude;
 
   const UserDonor({
     this.id,
@@ -21,6 +24,9 @@ class UserDonor {
     required this.Area,
     required this.Number,
     required this.Donoremail,
+     this.address,
+     this.latitude,
+     this.longitude,
   });
   tojason() {
     return {
@@ -30,6 +36,9 @@ class UserDonor {
       'City': City,
       'Area': Area,
       'Donoremail': Donoremail,
+      'address': address,
+      'latitude': latitude,
+      'longitude': longitude
     };
   }
 
@@ -44,6 +53,9 @@ class UserDonor {
       City: data['City'],
       Area: data['Area'],
       Donoremail: data['Donoremail'],
+      address: data['address'],
+      latitude: data['latitude'],
+      longitude: data['longitude']
     );
   }
 }

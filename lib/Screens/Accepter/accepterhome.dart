@@ -1,12 +1,16 @@
 // ignore_for_file: file_names
 import 'package:assignmen_1/Screens/Accepter/accepter_history.dart';
 import 'package:assignmen_1/Screens/Accepter/accepter_notification.dart';
+import 'package:assignmen_1/Screens/Accepter/map_screen.dart';
 import 'package:assignmen_1/Screens/Accepter/searchscreen.dart';
 import 'package:assignmen_1/Screens/selecttype.dart';
+import 'package:assignmen_1/repository/location_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../singleton.dart';
 
 class AccepterHome extends StatefulWidget {
   const AccepterHome({super.key});
@@ -78,6 +82,21 @@ class Accepterhomestate extends State {
               ),
               onTap: () {
                 Get.to(() => const Accepterhistory());
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.message_outlined),
+              title: const Text(
+                ' V i e w  M a p ',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+
+                if(Singleton.instance.currentLat!=0.0) {
+                  Get.to(() => const MyMap());
+                }else{
+                  LocationController().getCurrentLocation(context);
+                }
               },
             ),
             ListTile(

@@ -355,7 +355,9 @@ class DonorRegisterstate extends State {
                             City: City.toString(),
                             Area: Area.toString(),
                             Donoremail: homecontroller.emailController.text,
-                            Number: homecontroller.numbercontroller.text);
+                            Number: homecontroller.numbercontroller.text,
+
+                        );
                         await Donorrepository().CreateDonor(User);
                       }
                       try {

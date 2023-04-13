@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:assignmen_1/model/methodefile.dart';
 import 'package:get/get.dart';
 
-class Donorrepository extends GetxController {
+class Donorrepository {
   static Donorrepository get instance => Get.find();
   final _db = FirebaseFirestore.instance;
 
