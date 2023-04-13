@@ -80,7 +80,8 @@ class _MyMapState extends State<MyMap> {
           distance = distance / 1000;
           print("blood groups are: ${donorList[i].Bloodgroup}");
           print("donor list length is: ${donorList.length}");
-          if (donorList[i].Bloodgroup == dropdownBloodValue) {
+          if (distance <= dropdownValue &&
+              donorList[i].Bloodgroup == dropdownBloodValue) {
             print("calculated distance:$distance");
             print("dropdown $dropdownValue");
 
