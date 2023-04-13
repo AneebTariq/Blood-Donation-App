@@ -91,10 +91,9 @@ class Accepterhomestate extends State {
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-
-                if(Singleton.instance.currentLat!=0.0) {
+                if (Singleton.instance.currentLat != 0.0) {
                   Get.to(() => const MyMap());
-                }else{
+                } else {
                   LocationController().getCurrentLocation(context);
                 }
               },
@@ -151,7 +150,8 @@ class Accepterhomestate extends State {
                 ),
               ),
               onPressed: () {
-                Get.to(() => const SearchScreen());
+                // Get.to(() => const SearchScreen());
+                Get.to(MyMap());
               },
               child: const Text(
                 ' Search Donor',
