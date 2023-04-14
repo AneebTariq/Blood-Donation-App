@@ -153,7 +153,12 @@ class Accepterhomestate extends State {
               ),
               onPressed: () {
                 // Get.to(() => const SearchScreen());
-                Get.to(MyMap());
+
+                if (Singleton.instance.currentLat != 0.0) {
+                  Get.to(() => const MyMap());
+                } else {
+                  LocationController().getCurrentLocation(context);
+                }
               },
               child: const Text(
                 ' Search Donor',
