@@ -5,6 +5,7 @@ import 'package:assignmen_1/Screens/Accepter/map_screen.dart';
 import 'package:assignmen_1/Screens/Accepter/searchscreen.dart';
 import 'package:assignmen_1/Screens/selecttype.dart';
 import 'package:assignmen_1/repository/location_controller.dart';
+import 'package:assignmen_1/shared_pref/shared_pref.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -104,8 +105,9 @@ class Accepterhomestate extends State {
                 ' L o g o u t ',
                 style: TextStyle(fontSize: 18),
               ),
-              onTap: () {
-                FirebaseAuth.instance.signOut();
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                await SharedPrefClient().clearAcceptar();
                 Get.to(() => const Selected());
               },
             ),
