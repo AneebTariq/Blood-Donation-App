@@ -2,7 +2,6 @@
 import 'package:assignmen_1/Screens/Accepter/accepter_history.dart';
 import 'package:assignmen_1/Screens/Accepter/accepter_notification.dart';
 import 'package:assignmen_1/Screens/Accepter/map_screen.dart';
-import 'package:assignmen_1/Screens/Accepter/searchscreen.dart';
 import 'package:assignmen_1/Screens/selecttype.dart';
 import 'package:assignmen_1/repository/location_controller.dart';
 import 'package:assignmen_1/shared_pref/shared_pref.dart';

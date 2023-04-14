@@ -1,6 +1,7 @@
 import 'package:assignmen_1/Screens/Accepter/accepter_history.dart';
 import 'package:assignmen_1/Screens/donor/donor_history.dart';
 import 'package:assignmen_1/Screens/selecttype.dart';
+import 'package:assignmen_1/shared_pref/shared_pref.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -103,8 +104,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ' L o g o u t ',
                 style: TextStyle(fontSize: 18),
               ),
-              onTap: () {
+              onTap: () async {
                 FirebaseAuth.instance.signOut();
+                await SharedPrefClient().clearUser();
                 Get.to(() => const Selected());
               },
             ),
@@ -159,8 +161,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             height: 20,
           ),
           Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-              stream: usersCollection.snapshots(),
+            child: FutureBuilder<QuerySnapshot>(
+              future: usersCollection.get(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
