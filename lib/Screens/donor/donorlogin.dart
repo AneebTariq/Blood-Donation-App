@@ -132,14 +132,20 @@ class DonorLoginstate extends State {
                 onPressed: () async {
                   try {
                     // ignore: unused_local_variable
+                    print("Entered into login area:");
                     final credential =
                         await FirebaseAuth.instance.signInWithEmailAndPassword(
                       email: donoremail,
                       password: donorpassword,
                     );
-                    await SharedPrefClient().setUser(DonorUserModel(
-                        credential.user!.uid, credential.user!.email!));
-                    Get.offAll(() => const ProfileScreen());
+                    if (credential.user?.uid != null) {
+                      print("entered into credential check of login:");
+                      await SharedPrefClient().setUser(DonorUserModel(
+                          credential.user!.uid, credential.user!.email!));
+                      Get.offAll(() => const ProfileScreen());
+                    } else {
+                      print("entered into else print:");
+                    }
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
                       print('No user found for that email.');
