@@ -161,8 +161,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             height: 20,
           ),
           Expanded(
-            child: FutureBuilder<QuerySnapshot>(
-              future: usersCollection.get(),
+            child: StreamBuilder<QuerySnapshot>(
+              stream: usersCollection.snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {

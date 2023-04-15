@@ -139,9 +139,12 @@ class DonorLoginstate extends State {
                       password: donorpassword,
                     );
                     if (credential.user?.uid != null) {
+                      print("entered into credential check of login:");
                       await SharedPrefClient().setUser(DonorUserModel(
                           credential.user!.uid, credential.user!.email!));
                       Get.offAll(() => const ProfileScreen());
+                    } else {
+                      print("entered into else print:");
                     }
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
