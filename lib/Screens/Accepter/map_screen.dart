@@ -96,7 +96,8 @@ class _MyMapState extends State<MyMap> {
                   onTap: () {
                     print("marker tapped");
                     String donorId = donorList[i].Donoremail;
-                    Get.to(() => const Requesttodonor(),
+                    print("donar id is : ${donorList[i].Donoremail}");
+                    Get.to(const Requesttodonor(),
                         arguments: MyPageArguments(donorid: donorId));
                   }),
               icon: BitmapDescriptor.defaultMarker,

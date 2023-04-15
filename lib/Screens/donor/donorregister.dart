@@ -1,12 +1,10 @@
 // ignore_for_file: non_constant_identifier_names, avoid_types_as_parameter_names, duplicate_ignore, avoid_print, unused_local_variable
-
-import 'dart:math';
-
 import 'package:assignmen_1/Screens/donor/donor_Profile.dart';
 import 'package:assignmen_1/Screens/donor/registration_controller.dart';
 import 'package:assignmen_1/shared_pref/shared_pref.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import '../../model/donor_user_model.dart';
 import '../../model/methodefile.dart';
@@ -26,6 +24,7 @@ class DonorRegisterstate extends State {
   bool isRegistering = false;
 // SharedPreferences prefs = await SharedPreferences.getInstance();
 
+  GeolocatorPlatform? geolocator;
   String? blood;
   // ignore: non_constant_identifier_names
   String? Area;
@@ -56,12 +55,23 @@ class DonorRegisterstate extends State {
   String? dropdownareaValue = 'Qartba Chownk';
   String? dropdowncityValue = 'Lahore';
 
+  Position? position;
   // ignore: prefer_typing_uninitialized_variables
   var passwordobsc;
   @override
   void initState() {
     super.initState();
     passwordobsc = true;
+    geolocator = GeolocatorPlatform.instance;
+    getPosition();
+  }
+
+  getPosition() async {
+    LocationPermission locationP = await geolocator!.requestPermission();
+    print("hello $locationP");
+    if (locationP != LocationPermission.denied &&
+        locationP != LocationPermission.deniedForever)
+      position = await GeolocatorPlatform.instance.getCurrentPosition();
   }
 
   HomeController homecontroller = Get.put(HomeController());
@@ -386,6 +396,8 @@ class DonorRegisterstate extends State {
                                 Area: Area.toString(),
                                 Donoremail: homecontroller.emailController.text,
                                 Number: homecontroller.numbercontroller.text,
+                                latitude: position?.latitude ?? 31.4735933,
+                                longitude: position?.longitude ?? 74.3645786,
                               );
 
                               try {
@@ -421,15 +433,19 @@ class DonorRegisterstate extends State {
                                       colorText: Colors.white,
                                       snackPosition: SnackPosition.BOTTOM);
                                 }
+                                isRegistering = false;
+                                setState(() {});
                               } catch (e) {
                                 Get.snackbar("Some thing went wrong", "$e");
+                                isRegistering = false;
+                                setState(() {});
                               }
                             } else {
                               Get.snackbar("Missing Fields",
                                   "Try to fill all the missing fields");
+                              isRegistering = false;
+                              setState(() {});
                             }
-                            isRegistering = false;
-                            setState(() {});
                           },
                           child: const Text(
                             'Register',
