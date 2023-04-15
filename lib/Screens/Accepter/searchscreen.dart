@@ -45,10 +45,27 @@ class _SearchScreenState extends State {
   String Area = '';
   String City = '';
   List<String> area = [
-    'Gulbark',
-    'Green Town',
+    'Gulberg',
+    'Ravi',
     'Qartba Chownk',
     'College Road',
+    'Shalamar',
+    'wagha',
+    'Aziz Bhatti',
+    'Data Gunj Buksh',
+    'Samanabad',
+    'Iqbal Town',
+    'Nishtar',
+    'Green Town',
+    'Johar Town',
+    'Sabzazar',
+    'Awan Town',
+    'Model Town',
+    'Muslim Town',
+    'Gulshan-e-Ravi',
+    'Anakali',
+    'Mughalpura',
+    'Baghbanpura',
   ];
   List<String> bloodgroup = [
     'A+',

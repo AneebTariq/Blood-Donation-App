@@ -67,7 +67,7 @@ class Accepterhomestate extends State {
             ListTile(
               leading: const Icon(Icons.notifications_active),
               title: const Text(
-                ' R e q u e s t s ',
+                ' S t a t u s ',
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
@@ -91,10 +91,9 @@ class Accepterhomestate extends State {
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-
-                if(Singleton.instance.currentLat!=0.0) {
+                if (Singleton.instance.currentLat != 0.0) {
                   Get.to(() => const MyMap());
-                }else{
+                } else {
                   LocationController().getCurrentLocation(context);
                 }
               },

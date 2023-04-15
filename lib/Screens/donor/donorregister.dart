@@ -39,10 +39,27 @@ class DonorRegisterstate extends State {
     'O-',
   ];
   List<String> area = [
-    'Gulbark',
-    'Green Town',
+    'Gulberg',
+    'Ravi',
     'Qartba Chownk',
     'College Road',
+    'Shalamar',
+    'wagha',
+    'Aziz Bhatti',
+    'Data Gunj Buksh',
+    'Samanabad',
+    'Iqbal Town',
+    'Nishtar',
+    'Green Town',
+    'Johar Town',
+    'Sabzazar',
+    'Awan Town',
+    'Model Town',
+    'Muslim Town',
+    'Gulshan-e-Ravi',
+    'Anakali',
+    'Mughalpura',
+    'Baghbanpura',
   ];
   List<String> city = [
     'Lahore',
@@ -214,7 +231,6 @@ class DonorRegisterstate extends State {
                         borderSide: const BorderSide(color: Colors.red),
                         borderRadius: BorderRadius.circular(50.0),
                       ),
-                      hintStyle: const TextStyle(color: Colors.red),
                       hintText: 'name',
                     ),
                     validator: (value) {
@@ -244,7 +260,6 @@ class DonorRegisterstate extends State {
                         borderSide: const BorderSide(color: Colors.red),
                         borderRadius: BorderRadius.circular(50.0),
                       ),
-                      hintStyle: const TextStyle(color: Colors.red),
                       hintText: 'number',
                     ),
                     validator: (value) {
@@ -350,13 +365,12 @@ class DonorRegisterstate extends State {
                           .validate()) {
                         // ignore: non_constant_identifier_names
                         final User = UserDonor(
-                            Name: homecontroller.namecontroller.text,
-                            Bloodgroup: blood.toString(),
-                            City: City.toString(),
-                            Area: Area.toString(),
-                            Donoremail: homecontroller.emailController.text,
-                            Number: homecontroller.numbercontroller.text,
-
+                          Name: homecontroller.namecontroller.text,
+                          Bloodgroup: blood.toString(),
+                          City: City.toString(),
+                          Area: Area.toString(),
+                          Donoremail: homecontroller.emailController.text,
+                          Number: homecontroller.numbercontroller.text,
                         );
                         await Donorrepository().CreateDonor(User);
                       }

@@ -54,6 +54,8 @@ class Accepternotificationstate extends State {
                         children: [
                           ListTile(
                             textColor: Colors.black,
+                            trailing:
+                                Text(snapshot.data!.docs[index]['Status']),
                             title: Text('Name: ' +
                                 snapshot.data!.docs[index]['AccepName']),
                             subtitle: Text('Address: ' +
