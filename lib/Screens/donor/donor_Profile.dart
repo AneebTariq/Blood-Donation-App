@@ -57,8 +57,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text(
-                ' H o m e ',
-                style: TextStyle(fontSize: 18),
+                ' Home ',
+                style: TextStyle(fontSize: 20),
               ),
               onTap: () {
                 Get.offAll(() => const Selected());
@@ -67,8 +67,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ListTile(
               leading: const Icon(Icons.message_outlined),
               title: const Text(
-                ' I n c o m p l e t e ',
-                style: TextStyle(fontSize: 18),
+                ' Incomplete Requestes ',
+                style: TextStyle(fontSize: 20),
               ),
               onTap: () {
                 Get.to(() => const Donorhistory());
@@ -77,8 +77,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ListTile(
               leading: const Icon(Icons.notifications_active),
               title: const Text(
-                'V i e w    R e q u e s t s ',
-                style: TextStyle(fontSize: 18),
+                'View Requests ',
+                style: TextStyle(fontSize: 20),
               ),
               onTap: () {
                 Get.to(() => const Donornotification());
@@ -90,8 +90,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ListTile(
               leading: const Icon(Icons.message_outlined),
               title: const Text(
-                ' H i s t o r y ',
-                style: TextStyle(fontSize: 18),
+                ' History ',
+                style: TextStyle(fontSize: 20),
               ),
               onTap: () {
                 FirebaseAuth.instance.signOut();

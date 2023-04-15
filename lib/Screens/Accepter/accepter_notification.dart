@@ -29,7 +29,7 @@ class Accepternotificationstate extends State {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Notifications'),
+        title: const Text('Request Status'),
         backgroundColor: Colors.red,
       ),
       body: StreamBuilder<QuerySnapshot>(

@@ -98,9 +98,16 @@ class DonorRegisterstate extends State {
     String name = '', number = '';
 
     // ignore: no_leading_underscores_for_local_identifiers
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    //final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
-      key: _scaffoldKey,
+      appBar: AppBar(
+        title: const Center(
+            child: Text(
+          'Register',
+          style: TextStyle(fontSize: 30),
+        )),
+        backgroundColor: Colors.red,
+      ),
       body: SafeArea(
         child: !isRegistering
             ? SingleChildScrollView(
@@ -108,10 +115,10 @@ class DonorRegisterstate extends State {
                   key: homecontroller.loginFormKey,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    // mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       const SizedBox(
-                        height: 100,
+                        height: 30,
                       ),
                       // Enter Blood Group
                       Padding(
@@ -265,8 +272,14 @@ class DonorRegisterstate extends State {
                               borderSide: const BorderSide(color: Colors.red),
                               borderRadius: BorderRadius.circular(50.0),
                             ),
-                            hintStyle: const TextStyle(color: Colors.red),
                             hintText: 'name',
+                            prefixIcon: const Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Icon(
+                                Icons.person,
+                                color: Colors.red,
+                              ),
+                            ),
                           ),
                           validator: (value) {
                             if (value!.isEmpty ||
@@ -295,8 +308,14 @@ class DonorRegisterstate extends State {
                               borderSide: const BorderSide(color: Colors.red),
                               borderRadius: BorderRadius.circular(50.0),
                             ),
-                            hintStyle: const TextStyle(color: Colors.red),
                             hintText: 'number',
+                            prefixIcon: const Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Icon(
+                                Icons.numbers,
+                                color: Colors.red,
+                              ),
+                            ),
                           ),
                           validator: (value) {
                             if (value!.isEmpty ||
@@ -475,7 +494,7 @@ class DonorRegisterstate extends State {
                           const Text('Allready have account?'),
                           TextButton(
                             onPressed: () {
-                              Get.to(const DonorLogin());
+                              Get.off(() => const DonorLogin());
                             },
                             child: const Text(
                               'Login',

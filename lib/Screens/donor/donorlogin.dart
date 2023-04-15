@@ -31,12 +31,20 @@ class DonorLoginstate extends State {
     String donoremail = '', donorpassword = '';
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+            child: Text(
+          'Login',
+          style: TextStyle(fontSize: 30),
+        )),
+        backgroundColor: Colors.red,
+      ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: 100.0),
+              padding: const EdgeInsets.only(top: 20.0),
               child: Image.asset(
                 'assets/images/donate.png',
                 height: 300,
@@ -177,7 +185,7 @@ class DonorLoginstate extends State {
                 const Text('Do not have account?'),
                 TextButton(
                   onPressed: () {
-                    Get.to(() => const DonorRegister());
+                    Get.off(() => const DonorRegister());
                   },
                   child: const Text(
                     'Register',
