@@ -1,5 +1,4 @@
-import 'package:assignmen_1/Screens/Accepter/accepter_history.dart';
-import 'package:assignmen_1/Screens/donor/donor_history.dart';
+import 'package:assignmen_1/Screens/donor/donor_incomplete_requests.dart';
 import 'package:assignmen_1/Screens/selecttype.dart';
 import 'package:assignmen_1/shared_pref/shared_pref.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../notification.dart';
+import 'donor_history.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -71,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 style: TextStyle(fontSize: 20),
               ),
               onTap: () {
-                Get.to(() => const Donorhistory());
+                Get.to(() => const Donorincomphistory());
               },
             ),
             ListTile(
@@ -95,7 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               onTap: () {
                 FirebaseAuth.instance.signOut();
-                Get.to(() => const Accepterhistory());
+                Get.to(() => const Donorhistory());
               },
             ),
             ListTile(
