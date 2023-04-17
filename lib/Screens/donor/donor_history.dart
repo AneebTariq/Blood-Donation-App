@@ -35,12 +35,11 @@ class Donornotificationstate extends State {
   @override
   Widget build(BuildContext context) {
     String myaccepter = myString;
-    String getstatus = 'InCompleted';
+    //String getstatus = 'InCompleted';
     final Query<Map<String, dynamic>> usersCollection = FirebaseFirestore
         .instance
         .collection('AccepterRequest')
-        .where('Donorid', isEqualTo: myaccepter)
-        .where('Status', isEqualTo: getstatus);
+        .where('Donorid', isEqualTo: myaccepter);
 
     return Scaffold(
       appBar: AppBar(

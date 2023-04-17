@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Accepterhistory extends StatefulWidget {
   const Accepterhistory({super.key});
@@ -19,7 +17,7 @@ class Accepternotificationstate extends State {
   @override
   Widget build(BuildContext context) {
     String? myaccepter = user?.email;
-    String getstatus = 'Completed';
+
     final Query<Map<String, dynamic>> usersCollection = FirebaseFirestore
         .instance
         .collection('AccepterRequest')
