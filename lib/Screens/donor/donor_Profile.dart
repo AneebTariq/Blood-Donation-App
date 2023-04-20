@@ -52,6 +52,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
             UserAccountsDrawerHeader(
               decoration: const BoxDecoration(color: Colors.red),
               accountName: const Text('  '),
+              currentAccountPicture: Container(
+                width: 170.0,
+                height: 170.0,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    color: Colors.red,
+                    width: 6.0,
+                  ),
+                  shape: BoxShape.circle,
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/donor.png'),
+                  ),
+                ),
+              ),
               accountEmail: Text(mydonor),
             ),
             ListTile(
