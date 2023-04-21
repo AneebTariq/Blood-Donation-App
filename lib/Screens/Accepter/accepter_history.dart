@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Accepterhistory extends StatefulWidget {
   const Accepterhistory({super.key});
@@ -13,10 +14,28 @@ class Accepterhistory extends StatefulWidget {
 }
 
 class Accepternotificationstate extends State {
-  final user = FirebaseAuth.instance.currentUser;
+  String myString = '';
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future<SharedPreferences> getSharedPreferencesInstance() async {
+    return await SharedPreferences.getInstance();
+  }
+
+  Future<void> getData() async {
+    SharedPreferences prefs = await getSharedPreferencesInstance();
+    myString = prefs.getString('accepteremail') ?? '';
+    setState(() {});
+  }
+
+  // final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
-    String? myaccepter = user?.email;
+    String myaccepter = myString;
 
     final Query<Map<String, dynamic>> usersCollection = FirebaseFirestore
         .instance
