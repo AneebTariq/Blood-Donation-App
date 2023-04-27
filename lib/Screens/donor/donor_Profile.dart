@@ -82,7 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ListTile(
               leading: const Icon(Icons.message_outlined),
               title: const Text(
-                ' Incomplete Requestes ',
+                ' Incomplete Requests ',
                 style: TextStyle(fontSize: 20),
               ),
               onTap: () {

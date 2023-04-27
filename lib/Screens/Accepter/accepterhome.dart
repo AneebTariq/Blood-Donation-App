@@ -50,8 +50,23 @@ class Accepterhomestate extends State {
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Colors.red),
-              accountName: Text(''),
+              decoration: const BoxDecoration(color: Colors.red),
+              currentAccountPicture: Container(
+                width: 170.0,
+                height: 170.0,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    color: Colors.red,
+                    width: 6.0,
+                  ),
+                  shape: BoxShape.circle,
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/accepter.png'),
+                  ),
+                ),
+              ),
+              accountName: const Text(''),
               accountEmail: Text(myaccepter),
             ),
             ListTile(
